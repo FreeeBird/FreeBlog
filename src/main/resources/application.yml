@@ -12,3 +12,8 @@ spring:
       ddl-auto: create-drop
     show-sql: true
     database: mysql
+
+
+qiniuyun:
+  Accesskey: FA2GnJW8vQrfb9QeutuiNl4w4qPrjYDvpquLDhyK
+  SecretKey: ESOjdYhQ_oZd-VIhRp4u_cj0R9nCHPhMdNbE7IuZ
