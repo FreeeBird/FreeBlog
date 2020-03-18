@@ -19,25 +19,31 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Column
-    private String headImgUrl;
-    @Column
     private String email;
+    @Column
+    private String introduction;
+    @Column
+    private String portraitUrl;
 
     public User() {
     }
 
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", headImgUrl='" + headImgUrl + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getIntroduction() {
+        return introduction;
     }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getPortraitUrl() {
+        return portraitUrl;
+    }
+
+    public void setPortraitUrl(String portraitUrl) {
+        this.portraitUrl = portraitUrl;
+    }
+
 
     public Long getId() {
         return id;
@@ -69,14 +75,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
     }
 
     public String getEmail() {
