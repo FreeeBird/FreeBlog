@@ -10,25 +10,25 @@ public class Message {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     @Column
-    private Long guestId;
+    private Integer guestId;
     @Column
     private String content;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getGuestId() {
+    public Integer getGuestId() {
         return guestId;
     }
 
-    public void setGuestId(Long guestId) {
+    public void setGuestId(Integer guestId) {
         this.guestId = guestId;
     }
 

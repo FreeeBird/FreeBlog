@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     @Column
     private String nickname;
     @Column(nullable = false)
@@ -45,11 +45,11 @@ public class User {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

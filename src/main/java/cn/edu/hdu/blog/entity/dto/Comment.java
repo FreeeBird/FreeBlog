@@ -11,44 +11,44 @@ public class Comment {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     @Column
-    private Long articleId;
+    private Integer articleId;
     @Column
-    private Long ownerId;
+    private Integer ownerId;
     @Column
     private String contact;
     @Column
     private String content;
     @Column
-    private Long parentId;
+    private Integer parentId;
 
     public Comment() {
     }
 
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getArticleId() {
+    public Integer getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(Integer articleId) {
         this.articleId = articleId;
     }
 
-    public Long getOwnerId() {
+    public Integer getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -68,11 +68,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 }
