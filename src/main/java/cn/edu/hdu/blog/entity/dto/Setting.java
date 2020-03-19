@@ -13,9 +13,10 @@ public class Setting {
     @Id
     @GeneratedValue
     private Integer id;
-
     @Column
-    private String blogName;
+    private String title;
+    @Column
+    private String subtitle;
     @Column
     private String keywords;
     @Column
@@ -36,12 +37,20 @@ public class Setting {
         this.id = id;
     }
 
-    public String getBlogName() {
-        return blogName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBlogName(String blogName) {
-        this.blogName = blogName;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public String getKeywords() {

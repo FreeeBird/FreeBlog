@@ -13,7 +13,19 @@ public class Category {
     private Integer id;
     @Column
     private String name;
+    @Column
+    private String description;
 
+    public Category() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;

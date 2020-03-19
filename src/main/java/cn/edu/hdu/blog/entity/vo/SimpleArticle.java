@@ -1,56 +1,36 @@
-package cn.edu.hdu.blog.entity.dto;
+package cn.edu.hdu.blog.entity.vo;
 
-
-import cn.edu.hdu.blog.entity.enums.ArticleStatus;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
-@Entity
-public class Article {
-    @Id
-    @GeneratedValue
+
+public class SimpleArticle {
+
     private Integer id;
-    @Column
-    private String thumbnailUrl;
-    @Column
     private String title;
-    @Column(columnDefinition = "TEXT")
-    private String content;
-    @Column
+    private String thumbnailUrl;
     private Integer categoryId;
-    @Column
+    private String category;
     private Integer status;
-    @Column
-    private Integer hits = 0;
-    @Column
-    private Integer comments = 0;
-    @Column(updatable = false)
-    @CreatedDate
+    private Integer hits;
+    private Integer comments;
     private Date createTime;
-    @Column
-    @LastModifiedDate
     private Date updateTime;
 
-    public Article() {
+    public SimpleArticle() {
     }
 
-    public Article(String thumbnailUrl, String title, String content, Integer categoryId, Integer status) {
-        this.thumbnailUrl = thumbnailUrl;
+    public SimpleArticle(Integer id, String title, String thumbnailUrl, Integer categoryId, String category, Integer status, Integer hits, Integer comments, Date createTime, Date updateTime) {
+        this.id = id;
         this.title = title;
-        this.content = content;
-        this.categoryId = categoryId;
-        this.status = status;
-    }
-
-    public Article(String thumbnailUrl, String title, String content, Integer categoryId, Integer status, Integer hits, Integer comments, Date createTime, Date updateTime) {
         this.thumbnailUrl = thumbnailUrl;
-        this.title = title;
-        this.content = content;
         this.categoryId = categoryId;
+        this.category = category;
         this.status = status;
         this.hits = hits;
         this.comments = comments;
@@ -66,14 +46,6 @@ public class Article {
         this.id = id;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -82,12 +54,12 @@ public class Article {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Integer getCategoryId() {
@@ -96,6 +68,14 @@ public class Article {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Integer getStatus() {
