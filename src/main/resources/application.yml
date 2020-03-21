@@ -15,8 +15,8 @@ spring:
       ddl-auto: create-drop
     show-sql: true
     database: mysql
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
-
-qiniuyun:
-  Accesskey: FA2GnJW8vQrfb9QeutuiNl4w4qPrjYDvpquLDhyK
-  SecretKey: ESOjdYhQ_oZd-VIhRp4u_cj0R9nCHPhMdNbE7IuZ
