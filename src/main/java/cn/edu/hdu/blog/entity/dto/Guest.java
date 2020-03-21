@@ -1,37 +1,38 @@
 package cn.edu.hdu.blog.entity.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Date;
+import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.util.Date;
 @Entity
 public class Guest {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String nickname;
     @Column
     private String contact;
     @Column
-    private String Ip;
+    private String ip;
     @Column
-    private String device;
-    @Column
-    private String hostName;
+    private String host;
     @Column
     private String address;
     @Column
-    private String systemInfo;
+    private String userAgent;
     @Column
-    private String mac;
-    @Column
+    @CreatedDate
     private Date createTime;
 
     public Guest() {
+    }
+
+    public Guest(String ip, String host, String userAgent) {
+        this.ip = ip;
+        this.host = host;
+        this.userAgent = userAgent;
     }
 
     public Integer getId() {
@@ -59,27 +60,19 @@ public class Guest {
     }
 
     public String getIp() {
-        return Ip;
+        return ip;
     }
 
     public void setIp(String ip) {
-        Ip = ip;
+        this.ip = ip;
     }
 
-    public String getDevice() {
-        return device;
+    public String getHost() {
+        return host;
     }
 
-    public void setDevice(String device) {
-        this.device = device;
-    }
-
-    public String getHostName() {
-        return hostName;
-    }
-
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public String getAddress() {
@@ -90,20 +83,12 @@ public class Guest {
         this.address = address;
     }
 
-    public String getSystemInfo() {
-        return systemInfo;
+    public String getUserAgent() {
+        return userAgent;
     }
 
-    public void setSystemInfo(String systemInfo) {
-        this.systemInfo = systemInfo;
-    }
-
-    public String getMac() {
-        return mac;
-    }
-
-    public void setMac(String mac) {
-        this.mac = mac;
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
     }
 
     public Date getCreateTime() {
