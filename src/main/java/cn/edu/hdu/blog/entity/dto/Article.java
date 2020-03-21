@@ -1,33 +1,31 @@
 package cn.edu.hdu.blog.entity.dto;
 
-
-import cn.edu.hdu.blog.entity.enums.ArticleStatus;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Article {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String thumbnailUrl;
-    @Column
+    @Column(unique = true)
     private String title;
+    @Column
+    private String summary;
     @Column(columnDefinition = "TEXT")
     private String content;
-    @Column
+    @Column(columnDefinition = "int default 0")
     private Integer categoryId;
-    @Column
+    @Column(columnDefinition = "int default 0")
     private Integer status;
-    @Column
-    private Integer hits = 0;
-    @Column
-    private Integer comments = 0;
+    @Column(columnDefinition = "int default 0")
+    private Integer hits;
+    @Column(columnDefinition = "int default 0")
+    private Integer comments;
     @Column(updatable = false)
     @CreatedDate
     private Date createTime;
@@ -38,24 +36,12 @@ public class Article {
     public Article() {
     }
 
-    public Article(String thumbnailUrl, String title, String content, Integer categoryId, Integer status) {
-        this.thumbnailUrl = thumbnailUrl;
-        this.title = title;
-        this.content = content;
-        this.categoryId = categoryId;
-        this.status = status;
+    public String getSummary() {
+        return summary;
     }
 
-    public Article(String thumbnailUrl, String title, String content, Integer categoryId, Integer status, Integer hits, Integer comments, Date createTime, Date updateTime) {
-        this.thumbnailUrl = thumbnailUrl;
-        this.title = title;
-        this.content = content;
-        this.categoryId = categoryId;
-        this.status = status;
-        this.hits = hits;
-        this.comments = comments;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public Integer getId() {
@@ -144,6 +130,7 @@ public class Article {
                 "id=" + id +
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
                 ", content='" + content + '\'' +
                 ", categoryId=" + categoryId +
                 ", status=" + status +

@@ -5,19 +5,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
-
 public class SimpleArticle implements Serializable {
 
     private Integer id;
-    private String title;
     private String thumbnailUrl;
+    private String title;
+    private String summary;
     private Integer categoryId;
     private String category;
-    private Integer status;
     private Integer hits;
     private Integer comments;
     private Date createTime;
@@ -26,13 +26,13 @@ public class SimpleArticle implements Serializable {
     public SimpleArticle() {
     }
 
-    public SimpleArticle(Integer id, String title, String thumbnailUrl, Integer categoryId, String category, Integer status, Integer hits, Integer comments, Date createTime, Date updateTime) {
+    public SimpleArticle(Integer id, String thumbnailUrl, String title, String summary, Integer categoryId, String category, Integer hits, Integer comments, Date createTime, Date updateTime) {
         this.id = id;
-        this.title = title;
         this.thumbnailUrl = thumbnailUrl;
+        this.title = title;
+        this.summary = summary;
         this.categoryId = categoryId;
         this.category = category;
-        this.status = status;
         this.hits = hits;
         this.comments = comments;
         this.createTime = createTime;
@@ -47,6 +47,14 @@ public class SimpleArticle implements Serializable {
         this.id = id;
     }
 
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -55,12 +63,12 @@ public class SimpleArticle implements Serializable {
         this.title = title;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public Integer getCategoryId() {
@@ -77,14 +85,6 @@ public class SimpleArticle implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public Integer getHits() {
@@ -117,21 +117,5 @@ public class SimpleArticle implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "SimpleArticle{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
-                ", categoryId=" + categoryId +
-                ", category='" + category + '\'' +
-                ", status=" + status +
-                ", hits=" + hits +
-                ", comments=" + comments +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
     }
 }

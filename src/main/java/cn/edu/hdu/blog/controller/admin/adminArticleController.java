@@ -1,12 +1,11 @@
-package cn.edu.hdu.blog.controller;
+package cn.edu.hdu.blog.controller.admin;
 
 
+import cn.edu.hdu.blog.entity.dto.Article;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.ArticleService;
-import cn.edu.hdu.blog.service.inteface.CategoryService;
-import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,26 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.*;
+
 @RestController
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/admin/article")
+public class adminArticleController {
 
     @Autowired
     ArticleService articleService;
-    @Autowired
-    CategoryService categoryService;
 
     @RequestMapping(value = "")
-    public AjaxResult getArticleList(Integer pageNum,Integer pageSize){
+    public AjaxResult getArticleList(Integer pageNum, Integer pageSize){
         if(null == pageSize || null == pageNum) return null;
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
         Pageable pageable = PageRequest.of(pageNum,pageSize);
         return ResponseTool.success(articleService.getAll(pageable));
     }
 
-    @RequestMapping(value = "/search")
-    public AjaxResult searchArticles(String keyword){
-        return null;
+    @RequestMapping(value = "/{id}")
+    public AjaxResult getArticleById(@PathVariable Integer id){
+        return ResponseTool.success(articleService.getOne(id));
     }
 
     @RequestMapping(value = "/category/{categoryId}")
@@ -45,20 +44,16 @@ public class ArticleController {
         return ResponseTool.success(articleService.getArticleListByCategory(categoryId,pageable));
     }
 
+    @RequestMapping(value = "/remove",method = RequestMethod.POST)
+    public AjaxResult deleteById(Integer id){
+        if(articleService.deleteById(id)) return ResponseTool.success();
+        else return ResponseTool.failed();
 
-    @RequestMapping(value = "/{id}")
-    public AjaxResult getArticleById(@PathVariable Integer id){
-        return ResponseTool.success(articleService.getOne(id));
     }
 
-    @RequestMapping(value = "/comments")
-    public AjaxResult getComments(Integer articleId){
-        return null;
-    }
-
-    @RequestMapping(value = "/comment")
-    public AjaxResult createComment(Integer articleId,Integer guestId,String nickname,String contact,String content){
-        return null;
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public AjaxResult saveOne(Article article){
+        return ResponseTool.success(articleService.saveOne(article));
     }
 
 
