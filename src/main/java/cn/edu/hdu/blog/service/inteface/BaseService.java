@@ -8,11 +8,12 @@ import java.util.List;
 public interface BaseService<T> {
 
 
-    public T saveOne(T t);
-    public Boolean deleteById(Integer id);
-    public T getOne(Integer id);
-    public List<T> getAll();
-    public Page<T> getAll(Pageable pageable);
-    public List<T> getAll(Integer pageNum,Integer pageSize);
-    public Integer count();
+    T saveOne(T t);
+    Boolean deleteById(Integer id);
+    Integer deleteByIds(Integer... ids);
+    T getOne(Integer id);
+    List<T> getAll();
+    Page<T> getAll(Pageable pageable);
+    List<T> getAll(Integer pageNum,Integer pageSize);
+    Integer count();
 }

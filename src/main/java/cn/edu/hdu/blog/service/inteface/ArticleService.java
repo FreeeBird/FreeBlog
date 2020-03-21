@@ -9,5 +9,9 @@ import java.util.List;
 
 public interface ArticleService extends BaseService<Article> {
 
+    List<SimpleArticle> getPublicArticles();
+    List<SimpleArticle> getPrivateArticles();
+    List<SimpleArticle> getDraftArticles();
+
 
 }

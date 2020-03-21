@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer deleteByIds(Integer... ids) {
+        return null;
+    }
+
+    @Override
     public User saveOne(User user) {
         return userRepository.save(user);
     }

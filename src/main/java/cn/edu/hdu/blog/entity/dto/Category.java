@@ -1,31 +1,35 @@
 package cn.edu.hdu.blog.entity.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
 public class Category {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(unique = true)
     private String name;
-    @Column
-    private String description;
+    @Column(columnDefinition = "int default 0")
+    private Integer count;
 
     public Category() {
+        this.count = 0;
     }
 
-    public String getDescription() {
-        return description;
+    public Category(String name,Integer count) {
+        this.name = name;
+        this.count = count;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Integer getCount() {
+        return count;
     }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
 
     public Integer getId() {
         return id;
@@ -41,5 +45,15 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='"  + '\'' +
+                ", count=" + count +
+                '}';
     }
 }

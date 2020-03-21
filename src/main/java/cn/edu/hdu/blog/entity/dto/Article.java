@@ -137,4 +137,20 @@ public class Article {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", categoryId=" + categoryId +
+                ", status=" + status +
+                ", hits=" + hits +
+                ", comments=" + comments +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

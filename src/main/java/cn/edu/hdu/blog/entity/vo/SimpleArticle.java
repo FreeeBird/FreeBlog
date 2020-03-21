@@ -6,10 +6,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class SimpleArticle {
+public class SimpleArticle implements Serializable {
 
     private Integer id;
     private String title;
@@ -116,5 +117,21 @@ public class SimpleArticle {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleArticle{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                ", status=" + status +
+                ", hits=" + hits +
+                ", comments=" + comments +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
