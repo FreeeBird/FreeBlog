@@ -1,16 +1,13 @@
 package cn.edu.hdu.blog.entity.dto;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class User {
+public class Blogger {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String nickname;
@@ -18,14 +15,16 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column
+    @Column(nullable = false)
     private String email;
+    @Column
+    private String address;
     @Column
     private String introduction;
     @Column
     private String portraitUrl;
 
-    public User() {
+    public Blogger() {
     }
 
     public String getIntroduction() {
@@ -44,6 +43,13 @@ public class User {
         this.portraitUrl = portraitUrl;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Integer getId() {
         return id;

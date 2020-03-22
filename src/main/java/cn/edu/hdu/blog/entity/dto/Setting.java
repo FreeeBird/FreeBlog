@@ -1,19 +1,18 @@
 package cn.edu.hdu.blog.entity.dto;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Setting {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(columnDefinition = "varchar(255) default 'Blog'")
     private String title;
     @Column
     private String subtitle;
@@ -24,6 +23,7 @@ public class Setting {
     @Column
     private String description;
     @Column
+    @CreatedDate
     private Date createTime;
 
     public Setting() {
