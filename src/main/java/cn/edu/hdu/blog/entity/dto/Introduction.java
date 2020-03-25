@@ -7,26 +7,25 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Setting {
+public class Introduction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition = "varchar(255) default 'Blog'")
+    @Column
     private String title;
     @Column
     private String subtitle;
     @Column
     private String keywords;
     @Column
-    private String url;
-    @Column
     private String description;
+
     @Column
     @CreatedDate
     private Date createTime;
 
-    public Setting() {
+    public Introduction() {
     }
 
     public Integer getId() {
@@ -59,14 +58,6 @@ public class Setting {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getDescription() {

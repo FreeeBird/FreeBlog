@@ -7,6 +7,7 @@ import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.BloggerService;
 import cn.edu.hdu.blog.service.inteface.GuestService;
+import cn.edu.hdu.blog.service.inteface.IntroductionService;
 import cn.edu.hdu.blog.utils.SecureUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class CommonController {
     GuestService guestService;
     @Autowired
     BloggerService bloggerService;
+
 
     @RequestMapping(value = "/in")
     public AjaxResult checkIn(HttpServletRequest request){
@@ -38,4 +40,6 @@ public class CommonController {
         blogger.setUsername("");
         return ResponseTool.success(blogger);
     }
+
+
 }
