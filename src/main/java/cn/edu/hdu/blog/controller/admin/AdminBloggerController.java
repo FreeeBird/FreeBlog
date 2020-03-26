@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/blogger")
-public class BloggerController {
+public class AdminBloggerController {
 
     @Autowired
     BloggerService bloggerService;

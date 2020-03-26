@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping("admin/info")
-public class adminIntroductionController {
+public class AdminIntroductionController {
     @Autowired
     IntroductionService introductionService;
 
