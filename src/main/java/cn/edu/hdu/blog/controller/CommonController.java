@@ -35,7 +35,6 @@ public class CommonController {
     @RequestMapping("/blogger")
     public AjaxResult getBlogger(){
         Blogger blogger = bloggerService.getAll().get(0);
-        blogger.setEmail(SecureUtil.hideEmail(blogger.getEmail()));
         blogger.setPassword("");
         blogger.setUsername("");
         return ResponseTool.success(blogger);

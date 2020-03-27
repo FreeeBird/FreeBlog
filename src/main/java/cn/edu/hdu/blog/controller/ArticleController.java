@@ -26,10 +26,23 @@ public class ArticleController {
 
     @RequestMapping(value = "")
     public AjaxResult getArticleList(Integer pageNum,Integer pageSize){
-        if(null == pageSize || null == pageNum) return null;
+        if(null == pageSize || null == pageNum)
+            return ResponseTool.success(articleService.getPublicArticleList(Pageable.unpaged()));
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
         Pageable pageable = PageRequest.of(pageNum,pageSize);
-        return ResponseTool.success(articleService.getAll(pageable));
+        return ResponseTool.success(articleService.getPublicArticleList(pageable));
+    }
+
+    @RequestMapping(value = "/hits")
+    public AjaxResult getHitArticles(Integer num){
+        if(null==num || num<=0) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
+        return ResponseTool.success(articleService.getTopNumPublicOrderByHitsDesc(num));
+    }
+
+    @RequestMapping(value = "/newest")
+    public AjaxResult getNewArticles(Integer num){
+        if(null==num || num<=0) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
+        return ResponseTool.success(articleService.getTopNumPublicOrderByCreateTimeDesc(num));
     }
 
     @RequestMapping(value = "/search")
