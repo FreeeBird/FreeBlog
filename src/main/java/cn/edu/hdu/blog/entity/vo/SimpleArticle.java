@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class SimpleArticle implements Serializable {
 
     private Integer id;

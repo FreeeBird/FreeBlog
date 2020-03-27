@@ -39,7 +39,8 @@ public class AdminCategoryController {
 
     @RequestMapping(value = "/{id}")
     public AjaxResult getOneById(@PathVariable Integer id){
-        return ResponseTool.success(categoryService.getOne(id));
+        Category category = categoryService.getOne(id);
+        return ResponseTool.success(category);
     }
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)

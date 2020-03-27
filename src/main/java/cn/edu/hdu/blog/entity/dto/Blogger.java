@@ -1,9 +1,12 @@
 package cn.edu.hdu.blog.entity.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Blogger {
 
     @Id

@@ -1,12 +1,15 @@
 package cn.edu.hdu.blog.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Article {
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+public class Article implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,12 +39,21 @@ public class Article {
     public Article() {
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", content='" + content + '\'' +
+                ", categoryId=" + categoryId +
+                ", status=" + status +
+                ", hits=" + hits +
+                ", comments=" + comments +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 
     public Integer getId() {
@@ -66,6 +78,14 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getContent() {
@@ -122,22 +142,5 @@ public class Article {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", content='" + content + '\'' +
-                ", categoryId=" + categoryId +
-                ", status=" + status +
-                ", hits=" + hits +
-                ", comments=" + comments +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
     }
 }
