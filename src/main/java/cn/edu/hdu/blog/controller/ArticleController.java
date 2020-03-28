@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
 
     @Autowired
-    ArticleService articleService;
-    @Autowired
-    CategoryService categoryService;
+    private ArticleService articleService;
 
     @RequestMapping(value = "")
     public AjaxResult getArticleList(Integer pageNum,Integer pageSize){

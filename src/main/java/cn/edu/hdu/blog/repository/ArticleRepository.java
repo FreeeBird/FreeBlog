@@ -53,9 +53,6 @@ public interface ArticleRepository extends JpaRepository<Article,Integer>, JpaSp
 
     Integer countAllByStatus(Integer status);
 
-    List<Article> findAllByOrderByHitsDesc(Pageable pageable);
-
-    List<Article> findAllByOrderByCommentsDesc(Pageable pageable);
 
     List<Article> findAllByOrderByCreateTimeDesc(Pageable pageable);
 

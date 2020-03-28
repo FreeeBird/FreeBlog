@@ -3,10 +3,15 @@ package cn.edu.hdu.blog.entity.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Article {
     @Id
@@ -19,17 +24,17 @@ public class Article {
     private String content;
     @Column(columnDefinition = "int default 0")
     private Integer categoryId;
-    @Column(columnDefinition = "varchar default 0")
+    @Column(columnDefinition = "varchar(255) default ''")
     private String category;
     @Column(columnDefinition = "int default 0")
     private Integer status;// 0-公开 1-草稿
     @Column(columnDefinition = "int default 0")
     private Integer type;// 0-普通 1-Markdown格式
     @Column
-    @CreationTimestamp
+    @CreatedDate
     private Date createTime;
     @Column
-    @UpdateTimestamp
+    @LastModifiedDate
     private Date updateTime;
 
     public Article() {

@@ -2,10 +2,14 @@ package cn.edu.hdu.blog.entity.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Comment {
 
@@ -22,6 +26,8 @@ public class Comment {
     private String content;
     @Column
     private Integer parentId;
+    @CreatedDate
+    private Date createTime;
 
     public Comment() {
     }

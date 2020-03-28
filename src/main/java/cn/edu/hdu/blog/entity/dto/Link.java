@@ -1,8 +1,5 @@
 package cn.edu.hdu.blog.entity.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,24 +8,25 @@ import java.util.Date;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
-public class BlogInfo {
-
+public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
     private String title;
-    @Column
-    private String keywords;
-    @Column
     private String description;
-
-    @Column
+    private String url;
     @CreatedDate
     private Date createTime;
 
-    public BlogInfo() {
+    public Link() {
+    }
+
+    public Link(Integer id, String title, String description, String url, Date createTime) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.createTime = createTime;
     }
 
     public Integer getId() {
@@ -47,14 +45,6 @@ public class BlogInfo {
         this.title = title;
     }
 
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -63,11 +53,30 @@ public class BlogInfo {
         this.description = description;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Link{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }
