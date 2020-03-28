@@ -21,8 +21,8 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
-    @Autowired
-    CategoryService categoryService;
+//    @Autowired
+//    CategoryService categoryService;
 
     @RequestMapping(value = "")
     public AjaxResult getArticleList(Integer pageNum,Integer pageSize){

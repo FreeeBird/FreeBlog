@@ -5,45 +5,33 @@ import cn.edu.hdu.blog.repository.CategoryRepository;
 import cn.edu.hdu.blog.service.inteface.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-
 @Service
-@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
+
 
     @Override
+    @Transactional
     public Category saveOne(Category category) {
         return categoryRepository.save(category);
     }
 
     @Override
-    public Boolean deleteById(Integer id) {
-        categoryRepository.deleteById(id);
-        return !categoryRepository.existsById(id);
+    @Transactional
+    public Boolean deleteById(Integer integer) {
+        categoryRepository.deleteById(integer);
+        return !categoryRepository.existsById(integer);
     }
 
     @Override
-    public Integer deleteByIds(Integer... ids) {
-        return null;
-    }
-
-    @Override
-    public Category getOne(Integer id) {
-        return categoryRepository.getOne(id);
-    }
-
-    @Override
-    public List<Category> getAll() {
-        return categoryRepository.findAll();
+    public Category getOne(Integer integer) {
+        return categoryRepository.getOne(integer);
     }
 
     @Override
@@ -52,24 +40,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getAll(Integer pageNum, Integer pageSize) {
-        return categoryRepository.findAll(PageRequest.of(pageSize,pageNum)).getContent();
+    public Long count() {
+        return categoryRepository.count();
     }
 
     @Override
-    public Integer count() {
-        return Math.toIntExact(categoryRepository.count());
-    }
-
-    @Override
-    public List<Category> findAllOrderByCountDesc(Pageable pageable) {
+    public Page<Category> findAllOrderByCountDesc(Pageable pageable) {
         return categoryRepository.findAllByOrderByCountDesc(pageable);
     }
 
     @Override
+    @Transactional
     public Category countIncrement(Integer id) {
         Category category = categoryRepository.getOne(id);
         category.setCount(category.getCount()+1);
-        return categoryRepository.saveAndFlush(category);
+        return categoryRepository.save(category);
     }
 }

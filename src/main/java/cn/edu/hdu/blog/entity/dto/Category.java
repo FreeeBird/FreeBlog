@@ -14,25 +14,16 @@ public class Category {
     @Column(unique = true)
     private String name;
     @Column(columnDefinition = "int default 0")
-    private Integer count;
+    private Long count;
 
     public Category() {
-        this.count = 0;
     }
 
-    public Category(String name,Integer count) {
+    public Category(Integer id, String name, Long count) {
+        this.id = id;
         this.name = name;
         this.count = count;
     }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
 
     public Integer getId() {
         return id;
@@ -50,12 +41,19 @@ public class Category {
         this.name = name;
     }
 
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='"  + '\'' +
                 ", count=" + count +
                 '}';
     }

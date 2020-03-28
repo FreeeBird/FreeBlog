@@ -34,7 +34,7 @@ public class AdminCategoryController {
     }
 
     public AjaxResult getAll(){
-        return ResponseTool.success(categoryService.getAll());
+        return ResponseTool.success(categoryService.getAll(Pageable.unpaged()));
     }
 
     @RequestMapping(value = "/{id}")
@@ -57,6 +57,7 @@ public class AdminCategoryController {
 
     @RequestMapping(value = "/remove",method = RequestMethod.POST)
     public AjaxResult delete(Integer id){
+        if(null == id) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
         if(categoryService.deleteById(id))
             return ResponseTool.success();
         else return ResponseTool.failed();
