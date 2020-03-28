@@ -25,16 +25,16 @@ public class CommonController {
     BloggerService bloggerService;
 
 
-    @RequestMapping(value = "/in")
-    public AjaxResult checkIn(HttpServletRequest request){
-        Guest guest = new Guest();
-        guest.setIp(request.getRemoteAddr());
-        guest.setHost(request.getRemoteHost());
-        guest.setUserAgent(request.getHeader("User-Agent"));
-        guest = guestService.saveOne(guest);
-        request.getSession().setAttribute("userId",guest.getId());
-        return ResponseTool.success(guest);
-    }
+//    @RequestMapping(value = "/in")
+//    public AjaxResult checkIn(HttpServletRequest request){
+//        Guest guest = new Guest();
+//        guest.setIp(request.getRemoteAddr());
+//        guest.setHost(request.getRemoteHost());
+//        guest.setUserAgent(request.getHeader("User-Agent"));
+//        guest = guestService.saveOne(guest);
+//        request.getSession().setAttribute("userId",guest.getId());
+//        return ResponseTool.success(guest);
+//    }
 
     @RequestMapping("/blogger")
     public AjaxResult getBlogger(){
