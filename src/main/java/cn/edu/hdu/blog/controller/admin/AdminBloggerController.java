@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/blogger")
 public class AdminBloggerController {
 
-    @Autowired
-    BloggerService bloggerService;
-
-    @RequestMapping("")
-    public AjaxResult getBlogger(){
-        Blogger blogger = bloggerService.getAll().get(0);
-        blogger.setPassword("");
-        return ResponseTool.success(blogger);
-    }
-
-
-    @RequestMapping(value = "/updatePass",method = RequestMethod.POST)
-    public AjaxResult updatePassword(String oldPass,String newPass){
-        return null;
-    }
-
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public AjaxResult saveOne(Blogger blogger){
-        return ResponseTool.success(bloggerService.saveOne(blogger));
-    }
-
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public AjaxResult updateInfo(){
-        return null;
-    }
+//    @Autowired
+//    BloggerService bloggerService;
+//
+//    @RequestMapping("")
+//    public AjaxResult getBlogger(){
+//        Blogger blogger = bloggerService.getAll().get(0);
+//        blogger.setPassword("");
+//        return ResponseTool.success(blogger);
+//    }
+//
+//
+//    @RequestMapping(value = "/updatePass",method = RequestMethod.POST)
+//    public AjaxResult updatePassword(String oldPass,String newPass){
+//        return null;
+//    }
+//
+//    @RequestMapping(value = "/save",method = RequestMethod.POST)
+//    public AjaxResult saveOne(Blogger blogger){
+//        return ResponseTool.success(bloggerService.saveOne(blogger));
+//    }
+//
+//    @RequestMapping(value = "/update",method = RequestMethod.POST)
+//    public AjaxResult updateInfo(){
+//        return null;
+//    }
 
 }

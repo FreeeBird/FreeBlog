@@ -2,6 +2,7 @@ package cn.edu.hdu.blog.entity.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
-public class Introduction {
+public class BlogInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +18,15 @@ public class Introduction {
     @Column
     private String title;
     @Column
-    private String subtitle;
-    @Column
     private String keywords;
     @Column
     private String description;
 
     @Column
-    @CreatedDate
+    @CreationTimestamp
     private Date createTime;
 
-    public Introduction() {
+    public BlogInfo() {
     }
 
     public Integer getId() {
@@ -44,14 +43,6 @@ public class Introduction {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     public String getKeywords() {

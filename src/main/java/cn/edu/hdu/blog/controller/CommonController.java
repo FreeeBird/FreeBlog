@@ -3,23 +3,20 @@ package cn.edu.hdu.blog.controller;
 
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
-import cn.edu.hdu.blog.service.inteface.IntroductionService;
+import cn.edu.hdu.blog.service.inteface.BlogInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/info")
-public class BlogInfoController {
+public class CommonController {
 
     @Autowired
-    IntroductionService introductionService;
+    BlogInfoService blogInfoService;
 
-    @RequestMapping("")
+    @RequestMapping("/blogInfo")
     public AjaxResult getBlogIntro(){
-        return ResponseTool.success(introductionService.getAll().get(0));
+        return ResponseTool.success(blogInfoService.findFirst());
     }
-
-
 
 }

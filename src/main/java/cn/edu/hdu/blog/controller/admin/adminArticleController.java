@@ -18,42 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin/article")
 public class adminArticleController {
 
-    @Autowired
-    ArticleService articleService;
-
-    @RequestMapping(value = "")
-    public AjaxResult getArticleList(Integer pageNum, Integer pageSize){
-        if(null == pageSize || null == pageNum) return null;
-        if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
-        Pageable pageable = PageRequest.of(pageNum,pageSize);
-        return ResponseTool.success(articleService.getAll(pageable));
-    }
-
-    @RequestMapping(value = "/{id}")
-    public AjaxResult getArticleById(@PathVariable Integer id){
-        return ResponseTool.success(articleService.getOne(id));
-    }
-
-    @RequestMapping(value = "/category/{categoryId}")
-    public AjaxResult getArticlesByCategory(@PathVariable Integer categoryId,Integer pageNum,Integer pageSize){
-        if(null == categoryId) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
-        if(null==pageNum||null==pageSize) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
-        Pageable pageable = PageRequest.of(pageNum,pageSize);
-        return ResponseTool.success(articleService.getArticleListByCategory(categoryId,pageable));
-    }
-
-    @RequestMapping(value = "/remove",method = RequestMethod.POST)
-    public AjaxResult deleteById(Integer id){
-        if(articleService.deleteById(id)) return ResponseTool.success();
-        else return ResponseTool.failed();
-
-    }
-
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public AjaxResult saveOne(Article article){
-        return ResponseTool.success(articleService.saveOne(article));
-    }
-
+//    @Autowired
+//    ArticleService articleService;
+//
+//    @RequestMapping(value = "")
+//    public AjaxResult getArticleList(Integer pageNum, Integer pageSize){
+//        if(null == pageSize || null == pageNum) return null;
+//        if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
+//        Pageable pageable = PageRequest.of(pageNum,pageSize);
+//        return ResponseTool.success(articleService.getAll(pageable));
+//    }
+//
+//    @RequestMapping(value = "/{id}")
+//    public AjaxResult getArticleById(@PathVariable Integer id){
+//        return ResponseTool.success(articleService.getOne(id));
+//    }
+//
+//    @RequestMapping(value = "/category/{categoryId}")
+//    public AjaxResult getArticlesByCategory(@PathVariable Integer categoryId,Integer pageNum,Integer pageSize){
+//        if(null == categoryId) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
+//        if(null==pageNum||null==pageSize) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
+//        Pageable pageable = PageRequest.of(pageNum,pageSize);
+//        return ResponseTool.success(articleService.getArticleListByCategory(categoryId,pageable));
+//    }
+//
+//    @RequestMapping(value = "/remove",method = RequestMethod.POST)
+//    public AjaxResult deleteById(Integer id){
+//        if(articleService.deleteById(id)) return ResponseTool.success();
+//        else return ResponseTool.failed();
+//
+//    }
+//
+//    @RequestMapping(value = "/save",method = RequestMethod.POST)
+//    public AjaxResult saveOne(Article article){
+//        return ResponseTool.success(articleService.saveOne(article));
+//    }
+//
 
 
 }
