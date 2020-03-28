@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class SimpleArticle implements Serializable {
+public class ArticleWithCountVo implements Serializable {
 
     private Integer id;
     private String thumbnailUrl;
@@ -19,15 +19,17 @@ public class SimpleArticle implements Serializable {
     private String summary;
     private Integer categoryId;
     private String category;
-    private Integer hits;
-    private Integer comments;
+    private Long hits;
+    private Long comments;
     private Date createTime;
     private Date updateTime;
 
-    public SimpleArticle() {
+    public ArticleWithCountVo() {
     }
 
-    public SimpleArticle(Integer id, String thumbnailUrl, String title, String summary, Integer categoryId, String category, Integer hits, Integer comments, Date createTime, Date updateTime) {
+    public ArticleWithCountVo(Integer id, String thumbnailUrl, String title, String summary,
+                              Integer categoryId, String category, Long hits, Long comments,
+                              Date createTime, Date updateTime) {
         this.id = id;
         this.thumbnailUrl = thumbnailUrl;
         this.title = title;
@@ -88,19 +90,19 @@ public class SimpleArticle implements Serializable {
         this.category = category;
     }
 
-    public Integer getHits() {
+    public Long getHits() {
         return hits;
     }
 
-    public void setHits(Integer hits) {
+    public void setHits(Long hits) {
         this.hits = hits;
     }
 
-    public Integer getComments() {
+    public Long getComments() {
         return comments;
     }
 
-    public void setComments(Integer comments) {
+    public void setComments(Long comments) {
         this.comments = comments;
     }
 

@@ -1,39 +1,35 @@
 package cn.edu.hdu.blog.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
-public class Article implements Serializable {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
     private String thumbnailUrl;
-    @Column(unique = true)
     private String title;
-    @Column
     private String summary;
     @Column(columnDefinition = "TEXT")
     private String content;
     @Column(columnDefinition = "int default 0")
     private Integer categoryId;
+    @Column(columnDefinition = "varchar default 0")
+    private String category;
     @Column(columnDefinition = "int default 0")
-    private Integer status;
+    private Integer status;// 0-公开 1-草稿
     @Column(columnDefinition = "int default 0")
-    private Integer hits;
-    @Column(columnDefinition = "int default 0")
-    private Integer comments;
-    @Column(updatable = false)
-    @CreatedDate
+    private Integer type;// 0-普通 1-Markdown格式
+    @Column
+    @CreationTimestamp
     private Date createTime;
     @Column
-    @LastModifiedDate
+    @UpdateTimestamp
     private Date updateTime;
 
     public Article() {
@@ -48,9 +44,9 @@ public class Article implements Serializable {
                 ", summary='" + summary + '\'' +
                 ", content='" + content + '\'' +
                 ", categoryId=" + categoryId +
+                ", category='" + category + '\'' +
                 ", status=" + status +
-                ", hits=" + hits +
-                ", comments=" + comments +
+                ", type=" + type +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
@@ -58,6 +54,14 @@ public class Article implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setId(Integer id) {
@@ -112,20 +116,12 @@ public class Article implements Serializable {
         this.status = status;
     }
 
-    public Integer getHits() {
-        return hits;
+    public Integer getType() {
+        return type;
     }
 
-    public void setHits(Integer hits) {
-        this.hits = hits;
-    }
-
-    public Integer getComments() {
-        return comments;
-    }
-
-    public void setComments(Integer comments) {
-        this.comments = comments;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Date getCreateTime() {
