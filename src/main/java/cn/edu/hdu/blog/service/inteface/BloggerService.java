@@ -7,5 +7,6 @@ public interface BloggerService extends BaseService<Blogger,Integer>{
 
     Blogger getByUsernameAndPassword(String username,String password);
     Blogger getByEmail(String email);
-
+    Blogger getByPassword(String password);
+    Blogger findFirst();
 }

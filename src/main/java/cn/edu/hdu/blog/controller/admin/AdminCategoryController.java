@@ -22,7 +22,7 @@ public class AdminCategoryController {
 
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @RequestMapping("")
     public AjaxResult getAllByPage(Integer pageNum, Integer pageSize){

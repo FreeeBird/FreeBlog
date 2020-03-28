@@ -30,6 +30,31 @@ public class Blogger {
     public Blogger() {
     }
 
+    public Blogger(Integer id, String nickname, String username, String password, String email, String address, String introduction, String portraitUrl) {
+        this.id = id;
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.introduction = introduction;
+        this.portraitUrl = portraitUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Blogger{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", portraitUrl='" + portraitUrl + '\'' +
+                '}';
+    }
+
     public String getIntroduction() {
         return introduction;
     }
