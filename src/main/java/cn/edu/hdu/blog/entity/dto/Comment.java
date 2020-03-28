@@ -16,15 +16,11 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
     private Integer articleId;
-    @Column
-    private Integer ownerId;
-    @Column
-    private String contact;
-    @Column
+    private String nickname;
+    @Column(nullable = false)
+    private String email;
     private String content;
-    @Column
     private Integer parentId;
     @CreatedDate
     private Date createTime;
@@ -32,7 +28,28 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(Integer id, Integer articleId, String nickname, String email, String content, Integer parentId, Date createTime) {
+        this.id = id;
+        this.articleId = articleId;
+        this.nickname = nickname;
+        this.email = email;
+        this.content = content;
+        this.parentId = parentId;
+        this.createTime = createTime;
+    }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", articleId=" + articleId +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", content='" + content + '\'' +
+                ", parentId=" + parentId +
+                ", createTime=" + createTime +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -50,20 +67,20 @@ public class Comment {
         this.articleId = articleId;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getContact() {
-        return contact;
+    public String getEmail() {
+        return email;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContent() {
@@ -80,5 +97,13 @@ public class Comment {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
