@@ -1,14 +1,12 @@
-package cn.edu.hdu.blog.controller.admin;
+package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Blogger;
 import cn.edu.hdu.blog.response.AjaxResult;
-import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.BloggerService;
 import cn.edu.hdu.blog.utils.IgnorePropertiesUtil;
 import cn.edu.hdu.blog.utils.MD5Utils;
-import cn.edu.hdu.blog.utils.SecureUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/blogger")
-public class AdminBloggerController {
+public class BloggerSysController {
 
     @Autowired
     private BloggerService bloggerService;

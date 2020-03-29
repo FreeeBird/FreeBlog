@@ -24,15 +24,8 @@ public enum ArticleType {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
     public String getStatus() {
         return type;
     }
 
-    public void setStatus(String status) {
-        this.type = status;
-    }
 }

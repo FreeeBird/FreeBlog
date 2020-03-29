@@ -2,7 +2,7 @@ package cn.edu.hdu.blog.entity.enums;
 
 
 /**
- * 文章状态类型
+ * 文章状态
  */
 public enum ArticleStatus {
     PUBLIC(0,"公开"),
@@ -25,15 +25,9 @@ public enum ArticleStatus {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

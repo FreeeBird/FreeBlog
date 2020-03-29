@@ -31,8 +31,8 @@ public class GlobalCrosConfig {
                         .exposedHeaders("Header1", "Header2");
             }
 
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
 //                registry.addInterceptor(new SessionInterceptor())
 //                        .addPathPatterns("/**")
 //                        .excludePathPatterns("/ws/**")
@@ -44,7 +44,7 @@ public class GlobalCrosConfig {
 //                        .addPathPatterns("/op/**");
 //                registry.addInterceptor(new AdminInterceptor())
 //                        .addPathPatterns("/admin/**");
-            }
+//            }
         };
     }
 }

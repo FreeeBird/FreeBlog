@@ -1,4 +1,4 @@
-package cn.edu.hdu.blog.service.inteface;
+package cn.edu.hdu.blog.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

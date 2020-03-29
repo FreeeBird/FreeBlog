@@ -1,5 +1,6 @@
 package cn.edu.hdu.blog.service.inteface;
 
+import cn.edu.hdu.blog.service.BaseService;
 import cn.edu.hdu.blog.entity.dto.Article;
 import cn.edu.hdu.blog.entity.vo.ArticleVo;
 import cn.edu.hdu.blog.entity.vo.ArticleWithCountVo;

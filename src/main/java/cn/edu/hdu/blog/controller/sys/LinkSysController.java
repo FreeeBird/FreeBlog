@@ -1,4 +1,4 @@
-package cn.edu.hdu.blog.controller.admin;
+package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Link;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/link")
-public class AdminLinkController {
+public class LinkSysController {
     @Autowired
     private LinkService linkService;
 

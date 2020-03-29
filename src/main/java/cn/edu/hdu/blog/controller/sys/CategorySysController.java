@@ -1,4 +1,4 @@
-package cn.edu.hdu.blog.controller.admin;
+package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Category;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/category")
-public class AdminCategoryController {
+public class CategorySysController {
 
 
     @Autowired
