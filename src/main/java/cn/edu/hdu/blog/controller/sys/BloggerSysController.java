@@ -2,6 +2,7 @@ package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Blogger;
+import cn.edu.hdu.blog.entity.vo.BloggerSysVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.BloggerService;
@@ -28,10 +29,9 @@ public class BloggerSysController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public AjaxResult saveBlogger(Blogger blogger){
+    public AjaxResult saveBlogger(BloggerSysVo blogger){
         Blogger old = bloggerService.findFirst();
-        BeanUtils.copyProperties(blogger,old, IgnorePropertiesUtil.getNullPropertyNames(blogger));
-        System.out.println(old);
+        BeanUtils.copyProperties(blogger,old);
         return ResponseTool.success(bloggerService.saveOne(old));
     }
 

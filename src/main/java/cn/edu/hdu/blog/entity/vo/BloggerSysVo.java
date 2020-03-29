@@ -1,17 +1,36 @@
 package cn.edu.hdu.blog.entity.vo;
 
 
-public class BloggerVo {
+public class BloggerSysVo {
+
+    private String username;
     private String nickname;
     private String email;
     private String address;
     private String introduction;
     private String portraitUrl;
 
-    public BloggerVo() {
+    public BloggerSysVo() {
     }
 
-    public BloggerVo(String nickname, String email, String address, String introduction, String portraitUrl) {
+    public BloggerSysVo(String username, String nickname, String email, String address, String introduction, String portraitUrl) {
+        this.username = username;
+        this.nickname = nickname;
+        this.email = email;
+        this.address = address;
+        this.introduction = introduction;
+        this.portraitUrl = portraitUrl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public BloggerSysVo(String nickname, String email, String address, String introduction, String portraitUrl) {
         this.nickname = nickname;
         this.email = email;
         this.address = address;
