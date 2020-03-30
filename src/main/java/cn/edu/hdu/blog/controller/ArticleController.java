@@ -63,19 +63,20 @@ public class ArticleController {
         return null;
     }
 
-//    @ApiOperation(value = "获取某个分类的文章")
-//    @RequestMapping(value = "/category/{categoryId}")
-//    public AjaxResult getArticlesByCategory(@PathVariable Integer categoryId,Integer pageNum,Integer pageSize){
-//        if(null == categoryId) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
-//        if(null==pageNum||null==pageSize) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
-//        Pageable pageable = PageRequest.of(pageNum,pageSize);
-//        return ResponseTool.success(articleService.getArticleListByCategory(categoryId,pageable));
-//    }
+    @ApiOperation(value = "获取某个分类的文章")
+    @RequestMapping(value = "/category/{categoryId}")
+    public AjaxResult getArticlesByCategory(@PathVariable Integer categoryId,Integer pageNum,Integer pageSize){
+        if(null == categoryId) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
+        if(null==pageNum||null==pageSize) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
+        Pageable pageable = PageRequest.of(pageNum,pageSize);
+        return ResponseTool.success(articleService.getArticleWithCountVoListByCategory(categoryId,pageable));
+    }
 
 
 
     @RequestMapping(value = "/{articleId}/comments")
     public AjaxResult getComments(@PathVariable Integer articleId){
+
         //todo
         return null;
     }

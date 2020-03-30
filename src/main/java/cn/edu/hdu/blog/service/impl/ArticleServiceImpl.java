@@ -33,6 +33,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public Page<ArticleWithCountVo> getArticleWithCountVoListByCategory(Integer categoryId, Pageable pageable) {
+        return articleRepository.findArticleWithCountVoListByStatusAndCategoryId(
+                ArticleStatus.PUBLIC.getCode(),categoryId,pageable
+        );
+    }
+
+    @Override
     public Page<ArticleWithCountVo> getHeatArticleWithCountVoList(Integer num) {
         Pageable pageable = PageRequest.of(0,num);
         return articleRepository.findArticleWithCountVoListByStatusOrderByHits(ArticleStatus.PUBLIC.getCode(),pageable);

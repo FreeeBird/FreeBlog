@@ -14,7 +14,7 @@ public interface ArticleService extends BaseService<Article,Integer> {
     ArticleDetailVo getArticleById(Integer id);
 
     Page<ArticleWithCountVo> getArticleWithCountVoList(Pageable pageable);
-
+    Page<ArticleWithCountVo> getArticleWithCountVoListByCategory(Integer categoryId,Pageable pageable);
 
     Page<ArticleWithCountVo> getHeatArticleWithCountVoList(Integer num);
 
