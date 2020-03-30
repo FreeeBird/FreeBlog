@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
-
+    @Autowired
+    private ArticleHeatRepository heatRepository;
 
     @Override
     public ArticleDetailVo getArticleById(Integer id) {
+        heatRepository.increaseHits(id);
         return articleRepository.findByIdAndStatus(id,ArticleStatus.PUBLIC.getCode());
     }
 
