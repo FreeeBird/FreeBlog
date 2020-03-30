@@ -6,11 +6,17 @@ import java.util.Date;
 
 public class ArticleVo implements Serializable {
 
+    // ID
     private Integer id;
-    private String thumbnailUrl;
+    // 标题
     private String title;
+    // 摘要
     private String summary;
+    // 封面图链接
+    private String thumbnailUrl;
+    // 分类ID
     private Integer categoryId;
+    // 分类名称
     private String category;
     private Date createTime;
     private Date updateTime;

@@ -13,13 +13,21 @@ import java.util.Date;
 
 public class ArticleWithCountVo implements Serializable {
 
+    // ID
     private Integer id;
-    private String thumbnailUrl;
+    // 标题
     private String title;
+    // 摘要
     private String summary;
+    // 封面图链接
+    private String thumbnailUrl;
+    // 分类ID
     private Integer categoryId;
+    // 分类名称
     private String category;
+    // 点击数
     private Long hits;
+    // 评论数
     private Long comments;
     private Date createTime;
     private Date updateTime;
@@ -40,6 +48,22 @@ public class ArticleWithCountVo implements Serializable {
         this.comments = comments;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleWithCountVo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                ", hits=" + hits +
+                ", comments=" + comments +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 
     public Integer getId() {

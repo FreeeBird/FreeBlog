@@ -1,74 +1,33 @@
-package cn.edu.hdu.blog.entity.dto;
+package cn.edu.hdu.blog.entity.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ArticleDetailVo {
+
     private Integer id;
     private String thumbnailUrl;
     private String title;
     private String summary;
-    @Column(columnDefinition = "TEXT")
     private String content;
-    @Column(columnDefinition = "int default 0")
     private Integer categoryId;
-    @Column(columnDefinition = "int default 0")
+    private String category;
     private Integer status;// 0-公开 1-草稿
-    @Column(columnDefinition = "int default 0")
     private Integer type;// 0-普通 1-Markdown格式
-    @Column
-    @CreatedDate
+    private Long hits;
+    private Long comments;
     private Date createTime;
-    @Column
-    @LastModifiedDate
     private Date updateTime;
 
-    public Article() {
-    }
-
-    public Article(Integer id, String thumbnailUrl, String title, String summary, String content, Integer categoryId, Integer status, Integer type, Date createTime, Date updateTime) {
-        this.id = id;
-        this.thumbnailUrl = thumbnailUrl;
-        this.title = title;
-        this.summary = summary;
-        this.content = content;
-        this.categoryId = categoryId;
-        this.status = status;
-        this.type = type;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" +
-                "id=" + id +
-                ", thumbnailUrl='" + thumbnailUrl + '\'' +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", content='" + content + '\'' +
-                ", categoryId=" + categoryId +
-                ", status=" + status +
-                ", type=" + type +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+    public ArticleDetailVo() {
     }
 
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
@@ -114,6 +73,14 @@ public class Article {
         this.categoryId = categoryId;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -128,6 +95,22 @@ public class Article {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Long getHits() {
+        return hits;
+    }
+
+    public void setHits(Long hits) {
+        this.hits = hits;
+    }
+
+    public Long getComments() {
+        return comments;
+    }
+
+    public void setComments(Long comments) {
+        this.comments = comments;
     }
 
     public Date getCreateTime() {
@@ -146,5 +129,38 @@ public class Article {
         this.updateTime = updateTime;
     }
 
+    public ArticleDetailVo(Integer id, String thumbnailUrl, String title, String summary, String content, Integer categoryId, String category, Integer status, Integer type, Long hits, Long comments, Date createTime, Date updateTime) {
+        this.id = id;
+        this.thumbnailUrl = thumbnailUrl;
+        this.title = title;
+        this.summary = summary;
+        this.content = content;
+        this.categoryId = categoryId;
+        this.category = category;
+        this.status = status;
+        this.type = type;
+        this.hits = hits;
+        this.comments = comments;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
+    @Override
+    public String toString() {
+        return "ArticleDetailVo{" +
+                "id=" + id +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", content='" + content + '\'' +
+                ", categoryId=" + categoryId +
+                ", category='" + category + '\'' +
+                ", status=" + status +
+                ", type=" + type +
+                ", hits=" + hits +
+                ", comments=" + comments +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

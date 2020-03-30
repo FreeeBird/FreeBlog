@@ -29,12 +29,12 @@ public class ArticleSysController {
         if(null == pageSize || null == pageNum) return ResponseTool.failed();
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
         Pageable pageable = PageRequest.of(pageNum,pageSize);
-        return ResponseTool.success(articleService.getPublicArticleVoList(pageable));
+        return ResponseTool.success(articleService.getArticleWithCountVoList(pageable));
     }
 
     @RequestMapping(value = "/{id}")
     public AjaxResult getArticleById(@PathVariable Integer id){
-        return ResponseTool.success(articleService.getOne(id));
+        return ResponseTool.success(articleService.getArticleById(id));
     }
 
     @RequestMapping(value = "/draft",method = RequestMethod.GET)
@@ -42,7 +42,7 @@ public class ArticleSysController {
         if(null == pageSize || null == pageNum) return ResponseTool.failed();
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
         Pageable pageable = PageRequest.of(pageNum,pageSize);
-        return ResponseTool.success(articleService.getDraftArticleVoList(pageable));
+        return ResponseTool.success(articleService.getDraftWithCountVoList(pageable));
     }
 
 
