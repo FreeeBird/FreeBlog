@@ -3,6 +3,7 @@ package cn.edu.hdu.blog.controller.sys;
 
 import cn.edu.hdu.blog.entity.dto.BlogInfo;
 import cn.edu.hdu.blog.entity.vo.BlogInfoVo;
+import cn.edu.hdu.blog.entity.vo.BloggerSysVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.BlogInfoService;
@@ -21,13 +22,17 @@ public class BlogInfoSysController {
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult get(){
-        return ResponseTool.success(blogInfoService.findFirst());
+        BlogInfoVo blogInfoVo = new BlogInfoVo();
+        BeanUtils.copyProperties(blogInfoVo,blogInfoService.findFirst());
+        return ResponseTool.success(blogInfoVo);
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)
     public AjaxResult save(BlogInfoVo blogInfoVo){
         BlogInfo old = blogInfoService.findFirst();
         BeanUtils.copyProperties(blogInfoVo,old);
-        return ResponseTool.success(blogInfoService.saveOne(old));
+        old = blogInfoService.saveOne(old);
+        BeanUtils.copyProperties(old,blogInfoVo);
+        return ResponseTool.success(blogInfoVo);
     }
 }

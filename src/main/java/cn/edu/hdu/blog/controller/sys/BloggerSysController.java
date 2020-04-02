@@ -24,15 +24,17 @@ public class BloggerSysController {
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getBlogger(){
         Blogger blogger = bloggerService.findFirst();
-        blogger.setPassword("");
-        return ResponseTool.success(blogger);
+        BloggerSysVo bloggerSysVo = new BloggerSysVo();
+        BeanUtils.copyProperties(blogger,bloggerSysVo);
+        return ResponseTool.success(bloggerSysVo);
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)
     public AjaxResult saveBlogger(BloggerSysVo blogger){
         Blogger old = bloggerService.findFirst();
         BeanUtils.copyProperties(blogger,old);
-        return ResponseTool.success(bloggerService.saveOne(old));
+        bloggerService.saveOne(old);
+        return getBlogger();
     }
 
 

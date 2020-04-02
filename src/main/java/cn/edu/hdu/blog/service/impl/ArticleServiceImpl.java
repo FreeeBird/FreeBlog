@@ -70,7 +70,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article saveOne(Article article) {
-        return null;
+        return articleRepository.save(article);
     }
 
     @Override

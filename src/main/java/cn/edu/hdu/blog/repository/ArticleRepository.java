@@ -29,7 +29,7 @@ public interface ArticleRepository extends JpaRepository<Article,Integer>, JpaSp
 
     @Query(value = "select new cn.edu.hdu.blog.entity.vo.ArticleWithCountVo" +
             "(a.id,a.thumbnailUrl,a.title,a.summary,a.categoryId,c.name,h.hits,h.comments,a.createTime,a.updateTime) " +
-            "from Article a,ArticleHeat h,Category c where a.status = :status and a.id=h.articleId and a.categoryId=c.id order by a.createTime desc ")
+            "from Article a join ArticleHeat h on a.id=h.articleId join Category c on a.categoryId=c.id  where a.status = :status order by a.createTime desc ")
     Page<ArticleWithCountVo> findArticleWithCountVoListByStatusOrderByCreateTime(Integer status, Pageable pageable);
 
 

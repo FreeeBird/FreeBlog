@@ -6,6 +6,7 @@ import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.CategoryService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public class CategorySysController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("")
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getAllByPage(Integer pageNum, Integer pageSize){
         if(null == pageNum || null == pageSize) return getAll();
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
@@ -43,9 +44,11 @@ public class CategorySysController {
         return ResponseTool.success(category);
     }
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @RequestMapping(value = "",method = RequestMethod.POST)
     public AjaxResult saveOne(Category category){
-        return ResponseTool.success(categoryService.saveOne(category));
+        Category old = categoryService.getOne(category.getId());
+        BeanUtils.copyProperties(category,old);
+        return ResponseTool.success(categoryService.saveOne(old));
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)

@@ -6,14 +6,13 @@ import cn.edu.hdu.blog.entity.dto.Blogger;
 import cn.edu.hdu.blog.entity.dto.Message;
 import cn.edu.hdu.blog.entity.vo.BlogInfoVo;
 import cn.edu.hdu.blog.entity.vo.BloggerVo;
+import cn.edu.hdu.blog.entity.vo.StatisticsVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
-import cn.edu.hdu.blog.service.inteface.BlogInfoService;
-import cn.edu.hdu.blog.service.inteface.BloggerService;
-import cn.edu.hdu.blog.service.inteface.LinkService;
-import cn.edu.hdu.blog.service.inteface.MessageService;
+import cn.edu.hdu.blog.service.inteface.*;
 import cn.edu.hdu.blog.utils.MD5Utils;
+import cn.edu.hdu.blog.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,7 +36,15 @@ public class CommonController {
     @Autowired
     private LinkService linkService;
     @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
     private MessageService messageService;
+    @Autowired
+    private RedisUtil redisUtil;
 
 
     @ApiOperation(value = "发表留言",httpMethod = "POST",response = AjaxResult.class)
@@ -53,6 +60,7 @@ public class CommonController {
     @ApiOperation(value = "获取链接",httpMethod = "GET")
     @RequestMapping(value = "/link",method = RequestMethod.GET)
     public AjaxResult getLinks(Integer pageNum,Integer pageSize){
+
         if(null == pageNum|| null==pageSize)
             return ResponseTool.success(linkService.getAll(Pageable.unpaged()));
         if(pageNum<0||pageSize<1) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
@@ -79,6 +87,17 @@ public class CommonController {
         return ResponseTool.success(bloggerVo);
     }
 
+
+    @ApiOperation(value = "获取统计信息",httpMethod = "GET")
+    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
+    public AjaxResult getStatistics(){
+        Long articleNum = articleService.countArticle();
+        Long cateNum = categoryService.count();
+        Long comment = commentService.count();
+        Long mess = messageService.count();
+        StatisticsVo statisticsVo = new StatisticsVo(articleNum,cateNum,comment,mess);
+        return ResponseTool.success(statisticsVo);
+    }
 
 
 }

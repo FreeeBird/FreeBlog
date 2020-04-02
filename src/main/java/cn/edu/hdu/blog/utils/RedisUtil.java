@@ -126,7 +126,7 @@ public class RedisUtil {
      * @param item 项 不能为null
      * @return 值
      */
-    public Object hget(String key,String item){
+    public Object hashGet(String key,String item){
         return redisTemplate.opsForHash().get(key, item);
     }
 
@@ -135,7 +135,7 @@ public class RedisUtil {
      * @param key 键
      * @return 对应的多个键值
      */
-    public Map<Object,Object> hmget(String key){
+    public Map<Object,Object> hashMGet(String key){
         return redisTemplate.opsForHash().entries(key);
     }
 
@@ -145,7 +145,7 @@ public class RedisUtil {
      * @param map 对应多个键值
      * @return true 成功 false 失败
      */
-    public boolean hmset(String key, Map<String,Object> map){
+    public boolean hashMSet(String key, Map<String,Object> map){
         try {
             redisTemplate.opsForHash().putAll(key, map);
             return true;
@@ -162,7 +162,7 @@ public class RedisUtil {
      * @param time 时间(秒)
      * @return true成功 false失败
      */
-    public boolean hmset(String key, Map<String,Object> map, long time){
+    public boolean hashMSet(String key, Map<String,Object> map, long time){
         try {
             redisTemplate.opsForHash().putAll(key, map);
             if(time>0){
@@ -182,7 +182,7 @@ public class RedisUtil {
      * @param value 值
      * @return true 成功 false失败
      */
-    public boolean hset(String key,String item,Object value) {
+    public boolean hashSet(String key,String item,Object value) {
         try {
             redisTemplate.opsForHash().put(key, item, value);
             return true;
