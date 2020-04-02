@@ -12,4 +12,6 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     Page<Category> findAllByOrderByCountDesc(Pageable pageable);
+
+
 }

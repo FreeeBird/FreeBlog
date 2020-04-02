@@ -5,6 +5,7 @@ import cn.edu.hdu.blog.entity.dto.Category;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
+import cn.edu.hdu.blog.service.inteface.ArticleService;
 import cn.edu.hdu.blog.service.inteface.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class CategorySysController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getAllByPage(Integer pageNum, Integer pageSize){
@@ -51,18 +54,17 @@ public class CategorySysController {
         return ResponseTool.success(categoryService.saveOne(old));
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public AjaxResult saveOne(String name){
-        Category category = new Category();
-        category.setName(name);
-        return ResponseTool.success(categoryService.saveOne(category));
-    }
 
-    @RequestMapping(value = "/remove",method = RequestMethod.POST)
-    public AjaxResult delete(Integer id){
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public AjaxResult delete(@PathVariable Integer id){
         if(null == id) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
-        if(categoryService.deleteById(id))
+        Category def = categoryService.getAll(PageRequest.of(0,1)).getContent().get(0);
+        Category del = categoryService.getOne(id);
+        if(categoryService.deleteById(id)){
+            articleService.updateCategoryById(id,def.getId());
+            def.setCount(def.getCount()+del.getCount());
             return ResponseTool.success();
+        }
         else return ResponseTool.failed();
     }
 

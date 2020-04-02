@@ -58,6 +58,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public void updateCategoryById(Integer oldId, Integer newId) {
+        articleRepository.updateCategoryById(oldId, newId);
+    }
+
+    @Override
     public Long countArticleByCategory(Integer categoryId) {
         return articleRepository.countAllByCategoryIdAndStatus(categoryId,ArticleStatus.PUBLIC.getCode());
     }

@@ -22,6 +22,8 @@ public interface ArticleService extends BaseService<Article,Integer> {
 
     Page<ArticleWithCountVo> getDraftWithCountVoList(Pageable pageable);
 
+    void updateCategoryById(Integer oldId,Integer newId);
+
     Long countArticleByCategory(Integer categoryId);
     Long countArticle();
 

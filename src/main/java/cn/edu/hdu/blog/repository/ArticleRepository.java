@@ -8,8 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -54,20 +56,10 @@ public interface ArticleRepository extends JpaRepository<Article,Integer>, JpaSp
     Page<ArticleWithCountVo> searchArticleWithCountVoListByStatusAndTitleLikeOrSummaryLikeOrContentLike(Integer status,String keyword,Pageable pageable);
 
 
-
-//    @Query(value = "select new " +
-//            "cn.edu.hdu.blog.entity.vo.ArticleVo" +
-//            "(a.id,a.thumbnailUrl,a.title,a.summary,a.categoryId,c.name,a.createTime,a.updateTime) " +
-//            "from Article a,Category c where a.status = :status and a.categoryId=c.id")
-//    Page<ArticleVo> findArticleVoListByStatus(Integer status, Pageable pageable);
-//
-//    @Query(value = "select new " +
-//            "cn.edu.hdu.blog.entity.vo.ArticleVo" +
-//            "(a.id,a.thumbnailUrl,a.title,a.summary,a.categoryId,c.name,a.createTime,a.updateTime) " +
-//            "from Article a,Category c where a.categoryId=c.id")
-//    Page<ArticleVo> findArticleVoList(Pageable pageable);
-
-
+    @Transactional
+    @Modifying
+    @Query("update Article a set a.categoryId = :newId where a.categoryId = :oldId")
+    void updateCategoryById(Integer oldId,Integer newId);
 
 
 
