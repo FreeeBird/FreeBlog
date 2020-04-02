@@ -33,7 +33,9 @@ public class MessageAdminController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public AjaxResult removeOne(@PathVariable Integer id){
-        return ResponseTool.success(messageService.deleteById(id));
+        if(messageService.deleteById(id))
+            return ResponseTool.success();
+        return ResponseTool.failed();
     }
 
 }

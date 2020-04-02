@@ -22,7 +22,7 @@ public class LinkServiceImpl implements LinkService {
     @Override
     public Boolean deleteById(Integer integer) {
         linkRepository.deleteById(integer);
-        return linkRepository.existsById(integer);
+        return !linkRepository.existsById(integer);
     }
 
     @Override
