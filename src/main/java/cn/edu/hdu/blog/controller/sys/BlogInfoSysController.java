@@ -23,7 +23,7 @@ public class BlogInfoSysController {
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult get(){
         BlogInfoVo blogInfoVo = new BlogInfoVo();
-        BeanUtils.copyProperties(blogInfoVo,blogInfoService.findFirst());
+        BeanUtils.copyProperties(blogInfoService.findFirst(),blogInfoVo);
         return ResponseTool.success(blogInfoVo);
     }
 

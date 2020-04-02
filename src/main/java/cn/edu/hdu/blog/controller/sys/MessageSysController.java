@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/message")
-public class MessageAdminController {
+public class MessageSysController {
     @Autowired
     private MessageService messageService;
 

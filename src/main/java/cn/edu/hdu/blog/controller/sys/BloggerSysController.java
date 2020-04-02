@@ -47,10 +47,5 @@ public class BloggerSysController {
         return ResponseTool.success(bloggerService.saveOne(blogger));
     }
 
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public AjaxResult saveOne(Blogger blogger){
-        return ResponseTool.success(bloggerService.saveOne(blogger));
-    }
-
 
 }

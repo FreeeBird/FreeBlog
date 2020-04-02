@@ -18,7 +18,7 @@ public class Article {
     private String thumbnailUrl;
     private String title;
     private String summary;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
     @Column(columnDefinition = "int default 0")
     private Integer categoryId;
