@@ -14,6 +14,9 @@ public enum MsgType {
     NICKNAME_IS_EMPTY(3103,"昵称为空"),
     PERMISSION_DENIED(3200,"权限不允许"),
     NOT_LOGIN(3300,"没有登录"),
+    LOGIN_FAILED(3400,"用户名或密码不对"),
+    LOGIN_USERNAME_IS_NULL(3401,"用户名不能为空"),
+    LOGIN_PASS_IS_NULL(3402,"密码不能为空"),
 
 
     SYSTEM_DATA_ERROR(5100,"系统数据错误"),

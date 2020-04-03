@@ -1,5 +1,6 @@
 package cn.edu.hdu.blog.config;
 
+import cn.edu.hdu.blog.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -10,7 +11,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 跨域
  */
 @Configuration
-public class GlobalCrosConfig {
+public class WebConfiguration {
+
+    @Bean
+    LoginInterceptor loginInterceptor() {
+        return new LoginInterceptor();
+    }
+
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -31,20 +39,17 @@ public class GlobalCrosConfig {
                         .exposedHeaders("Header1", "Header2");
             }
 
-//            @Override
-//            public void addInterceptors(InterceptorRegistry registry) {
-//                registry.addInterceptor(new SessionInterceptor())
-//                        .addPathPatterns("/**")
-//                        .excludePathPatterns("/ws/**")
-//                        .excludePathPatterns("/websocket/**")
-//                        .excludePathPatterns("/hotel/**")
-//                        .excludePathPatterns("/login/**")
-//                        .excludePathPatterns("/register/**");
-//                registry.addInterceptor(new OpInterceptor())
-//                        .addPathPatterns("/op/**");
-//                registry.addInterceptor(new AdminInterceptor())
-//                        .addPathPatterns("/admin/**");
-//            }
+            @Override
+            public void addInterceptors(InterceptorRegistry registry) {
+                registry.addInterceptor(loginInterceptor())
+                        .addPathPatterns("/admin/**")
+                        .addPathPatterns("/logout");
+            }
         };
     }
+
+
+
+
+
 }
