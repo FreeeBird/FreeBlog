@@ -47,11 +47,16 @@ public class CategorySysController {
         return ResponseTool.success(category);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "",method = RequestMethod.PUT)
     public AjaxResult saveOne(Category category){
         Category old = categoryService.getOne(category.getId());
         BeanUtils.copyProperties(category,old);
         return ResponseTool.success(categoryService.saveOne(old));
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    public AjaxResult addOne(Category category){
+        return ResponseTool.success(categoryService.saveOne(category));
     }
 
 

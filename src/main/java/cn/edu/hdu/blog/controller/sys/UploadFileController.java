@@ -21,7 +21,7 @@ public class UploadFileController {
     private QiNiuUtil qiNiuUtil;
 
     @RequestMapping(value = "/img",method = RequestMethod.POST)
-    public AjaxResult uploadFileToQiniu(@RequestParam("file") MultipartFile file) throws IOException {
+    public AjaxResult uploadFileToQiniu(@RequestParam("img") MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));

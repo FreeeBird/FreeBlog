@@ -14,12 +14,13 @@ public class Category {
     @Column(unique = true)
     private String name;
     @Column(columnDefinition = "int default 0")
-    private Long count;
+    private Integer count;
 
     public Category() {
+        this.count=0;
     }
 
-    public Category(Integer id, String name, Long count) {
+    public Category(Integer id, String name, Integer count) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -41,11 +42,11 @@ public class Category {
         this.name = name;
     }
 
-    public Long getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
