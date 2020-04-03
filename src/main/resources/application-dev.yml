@@ -24,3 +24,16 @@ spring:
     port: 6379
     host: localhost
     database: 0
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      resolve-lazily: false
+
+qiniu:
+    domain: q85tncpu6.bkt.clouddn.com
+    access-key: FA2GnJW8vQrfb9QeutuiNl4w4qPrjYDvpquLDhyK
+    secret-key: ESOjdYhQ_oZd-VIhRp4u_cj0R9nCHPhMdNbE7IuZ
+    bucket: free-blog-api
