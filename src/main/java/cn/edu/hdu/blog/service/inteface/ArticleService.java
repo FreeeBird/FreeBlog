@@ -1,12 +1,15 @@
 package cn.edu.hdu.blog.service.inteface;
 
-import cn.edu.hdu.blog.entity.vo.ArticleDetailVo;
-import cn.edu.hdu.blog.service.BaseService;
 import cn.edu.hdu.blog.entity.dto.Article;
+import cn.edu.hdu.blog.entity.vo.ArchiveVo;
+import cn.edu.hdu.blog.entity.vo.ArticleDetailVo;
 import cn.edu.hdu.blog.entity.vo.ArticleVo;
 import cn.edu.hdu.blog.entity.vo.ArticleWithCountVo;
+import cn.edu.hdu.blog.service.BaseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 
 public interface ArticleService extends BaseService<Article,Integer> {
@@ -22,7 +25,15 @@ public interface ArticleService extends BaseService<Article,Integer> {
 
     Page<ArticleWithCountVo> getDraftWithCountVoList(Pageable pageable);
 
+    //归档
+    List<ArchiveVo> getArchiveMonths();
+    Page<ArticleVo> getArticleVoGroupByMonth(Integer year,Integer month,Pageable pageable);
+
+    Page<ArticleWithCountVo> searchArticles(String keyword,Pageable pageable);
+
     void updateCategoryById(Integer oldId,Integer newId);
+
+    Boolean isExistById(Integer id);
 
     Long countArticleByCategory(Integer categoryId);
     Long countArticle();

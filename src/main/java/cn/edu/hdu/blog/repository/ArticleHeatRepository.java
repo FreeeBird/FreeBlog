@@ -1,10 +1,6 @@
 package cn.edu.hdu.blog.repository;
 
 import cn.edu.hdu.blog.entity.dto.Article;
-import cn.edu.hdu.blog.entity.vo.ArticleDetailVo;
-import cn.edu.hdu.blog.entity.vo.ArticleWithCountVo;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,7 +15,12 @@ public interface ArticleHeatRepository extends JpaRepository<Article,Integer>, J
 
     @Transactional
     @Modifying
-    @Query(value = "update article_heat h set h.hits=h.hits+1 where h.article_id=?1",nativeQuery = true)
+    @Query(value = "update ArticleHeat h set h.hits=h.hits+1 where h.articleId=:aid")
     void increaseHits(Integer aid);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update ArticleHeat h set h.comments=h.comments+1 where h.articleId=:aid")
+    void increaseComment(Integer aid);
 
 }

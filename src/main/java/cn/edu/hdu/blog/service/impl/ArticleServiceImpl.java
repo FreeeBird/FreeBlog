@@ -2,7 +2,9 @@ package cn.edu.hdu.blog.service.impl;
 
 import cn.edu.hdu.blog.entity.dto.Article;
 import cn.edu.hdu.blog.entity.enums.ArticleStatus;
+import cn.edu.hdu.blog.entity.vo.ArchiveVo;
 import cn.edu.hdu.blog.entity.vo.ArticleDetailVo;
+import cn.edu.hdu.blog.entity.vo.ArticleVo;
 import cn.edu.hdu.blog.entity.vo.ArticleWithCountVo;
 import cn.edu.hdu.blog.repository.ArticleHeatRepository;
 import cn.edu.hdu.blog.repository.ArticleRepository;
@@ -13,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -58,8 +62,30 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<ArchiveVo> getArchiveMonths() {
+        return articleRepository.getArchiveGroupByMonth(ArticleStatus.PUBLIC.getCode(),Pageable.unpaged()).getContent();
+    }
+
+    @Override
+    public Page<ArticleVo> getArticleVoGroupByMonth(Integer year,Integer month,Pageable pageable) {
+        return articleRepository.getArticleByMonth(ArticleStatus.PUBLIC.getCode(),year,month,pageable);
+    }
+
+    @Override
+    public Page<ArticleWithCountVo> searchArticles(String keyword, Pageable pageable) {
+        return articleRepository.searchArticleWithCountVoListByStatusAndTitleLikeOrSummaryLikeOrContentLike(
+                ArticleStatus.PUBLIC.getCode(),keyword,pageable
+        );
+    }
+
+    @Override
     public void updateCategoryById(Integer oldId, Integer newId) {
         articleRepository.updateCategoryById(oldId, newId);
+    }
+
+    @Override
+    public Boolean isExistById(Integer id) {
+        return articleRepository.existsById(id);
     }
 
     @Override

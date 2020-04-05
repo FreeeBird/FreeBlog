@@ -11,11 +11,9 @@ import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.*;
-import cn.edu.hdu.blog.utils.MD5Utils;
 import cn.edu.hdu.blog.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +52,8 @@ public class CommonController {
             ResponseTool.failed(MsgType.NICKNAME_IS_EMPTY);
         if(StringUtils.isEmpty(message.getEmail()))
             ResponseTool.failed(MsgType.EMAIL_IS_EMPTY);
+        message.setId(null);
+        message.setCreateTime(null);
         return ResponseTool.success(messageService.saveOne(message));
     }
 
