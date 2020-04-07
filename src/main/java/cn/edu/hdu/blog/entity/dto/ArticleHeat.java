@@ -9,8 +9,6 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class ArticleHeat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private Integer articleId;
     @Column(columnDefinition = "bigint default 1")
     private Long hits;
@@ -20,20 +18,12 @@ public class ArticleHeat {
     public ArticleHeat() {
     }
 
-    public ArticleHeat(Integer id, Integer articleId, Long hits, Long comments) {
-        this.id = id;
+    public ArticleHeat( Integer articleId, Long hits, Long comments) {
         this.articleId = articleId;
         this.hits = hits;
         this.comments = comments;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getArticleId() {
         return articleId;

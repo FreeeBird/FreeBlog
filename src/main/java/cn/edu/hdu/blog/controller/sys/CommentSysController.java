@@ -28,7 +28,7 @@ public class CommentSysController {
         if(null==pageNum || null== pageSize) return ResponseTool.failed();
         Pageable pageable = PageRequest.of(pageNum,pageSize);
         if(pageable.isUnpaged()) ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
-        return ResponseTool.success(commentService.getAll(pageable));
+        return ResponseTool.success(commentService.getAllCommentSysVo(pageable));
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)

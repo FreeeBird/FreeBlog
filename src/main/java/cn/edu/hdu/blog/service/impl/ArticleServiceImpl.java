@@ -1,6 +1,7 @@
 package cn.edu.hdu.blog.service.impl;
 
 import cn.edu.hdu.blog.entity.dto.Article;
+import cn.edu.hdu.blog.entity.dto.ArticleHeat;
 import cn.edu.hdu.blog.entity.enums.ArticleStatus;
 import cn.edu.hdu.blog.entity.vo.ArchiveVo;
 import cn.edu.hdu.blog.entity.vo.ArticleDetailVo;
@@ -8,6 +9,7 @@ import cn.edu.hdu.blog.entity.vo.ArticleVo;
 import cn.edu.hdu.blog.entity.vo.ArticleWithCountVo;
 import cn.edu.hdu.blog.repository.ArticleHeatRepository;
 import cn.edu.hdu.blog.repository.ArticleRepository;
+import cn.edu.hdu.blog.repository.CategoryRepository;
 import cn.edu.hdu.blog.service.inteface.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
     @Autowired
     private ArticleHeatRepository heatRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public ArticleDetailVo getArticleById(Integer id) {
@@ -101,6 +105,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article saveOne(Article article) {
+        if (article.getId() == null){
+            article =articleRepository.save(article);
+            categoryRepository.increaseCount(article.getCategoryId());
+            ArticleHeat heat = new ArticleHeat();
+            heat.setArticleId(article.getId());
+            heat.setComments(0L);
+            heat.setHits(0L);
+            heatRepository.save(heat);
+            return article;
+        }
         return articleRepository.save(article);
     }
 

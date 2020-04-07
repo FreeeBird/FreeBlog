@@ -55,13 +55,20 @@ public class ArticleSysController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public AjaxResult saveOne(Article article){
+    public AjaxResult addOne(Article article){
         if(null == article) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
         Article article1 = articleService.saveOne(article);
         categoryService.countIncrement(article1.getCategoryId());
         return ResponseTool.success(article1);
     }
 
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    public AjaxResult saveOne(Article article){
+        if(null == article) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
+        Article article1 = articleService.saveOne(article);
+        categoryService.countIncrement(article1.getCategoryId());
+        return ResponseTool.success(article1);
+    }
 
 
 }
