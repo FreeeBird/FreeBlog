@@ -51,9 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public Category countIncrement(Integer id) {
+    public Category countChange(Integer id,Integer change) {
         Category category = categoryRepository.getOne(id);
-        category.setCount(category.getCount()+1);
+        category.setCount(category.getCount()+change);
         return categoryRepository.save(category);
     }
 }

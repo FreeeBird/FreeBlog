@@ -1,6 +1,7 @@
 package cn.edu.hdu.blog.controller.sys;
 
 
+import cn.edu.hdu.blog.entity.dto.Statistics;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.StatisticsService;
@@ -24,7 +25,11 @@ public class StatisticsSysController {
         return ResponseTool.success(statisticsService.getAll(PageRequest.of(0,7)));
     }
 
-    
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public AjaxResult getStatistics(){
+        Statistics statistics = new Statistics();
+        return null;
+    }
 
 
 }

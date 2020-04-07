@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 public interface CategoryService extends BaseService<Category,Integer> {
 
     Page<Category> findAllOrderByCountDesc(Pageable pageable);
-    Category countIncrement(Integer id);
+    Category countChange(Integer id,Integer change);
 
 
 }

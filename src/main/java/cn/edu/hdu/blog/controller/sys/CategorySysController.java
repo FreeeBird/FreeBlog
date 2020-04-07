@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/admin/category")
 public class CategorySysController {
@@ -33,8 +31,7 @@ public class CategorySysController {
         if(null == pageNum || null == pageSize) return getAll();
         if(pageNum<0) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
         Pageable pageable = PageRequest.of(pageNum,pageSize);
-        List<Category> categories = categoryService.getAll(pageable).getContent();
-        return ResponseTool.success(categories);
+        return ResponseTool.success(categoryService.getAll(pageable));
     }
 
     public AjaxResult getAll(){

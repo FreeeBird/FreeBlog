@@ -24,8 +24,7 @@ public class UploadFileController {
     public AjaxResult uploadFileToQiniu(@RequestParam("img") MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         assert originalFilename != null;
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String fileKey = UUID.randomUUID().toString() + suffix;
+        String fileKey = UUID.randomUUID().toString()+originalFilename;
         return ResponseTool.success(qiNiuUtil.upload(file.getInputStream(),fileKey));
     }
 

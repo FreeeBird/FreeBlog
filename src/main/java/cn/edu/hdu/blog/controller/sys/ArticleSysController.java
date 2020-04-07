@@ -34,7 +34,7 @@ public class ArticleSysController {
 
     @RequestMapping(value = "/{id}")
     public AjaxResult getArticleById(@PathVariable Integer id){
-        return ResponseTool.success(articleService.getArticleById(id));
+        return ResponseTool.success(articleService.getOne(id));
     }
 
     @RequestMapping(value = "/draft",method = RequestMethod.GET)
@@ -58,16 +58,22 @@ public class ArticleSysController {
     public AjaxResult addOne(Article article){
         if(null == article) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
         Article article1 = articleService.saveOne(article);
-        categoryService.countIncrement(article1.getCategoryId());
+        categoryService.countChange(article1.getCategoryId(),1);
         return ResponseTool.success(article1);
     }
 
     @RequestMapping(value = "",method = RequestMethod.PUT)
     public AjaxResult saveOne(Article article){
         if(null == article) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
-        Article article1 = articleService.saveOne(article);
-        categoryService.countIncrement(article1.getCategoryId());
-        return ResponseTool.success(article1);
+        Article old = articleService.getOne(article.getId());
+        if(old.getCategoryId()!=article.getCategoryId()){
+            categoryService.countChange(article.getCategoryId(),1);
+            categoryService.countChange(old.getCategoryId(),-1);
+        }
+        article.setCreateTime(null);
+        article.setUpdateTime(null);
+        article = articleService.saveOne(article);
+        return ResponseTool.success(article);
     }
 
 
