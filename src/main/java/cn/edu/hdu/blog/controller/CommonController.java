@@ -4,9 +4,9 @@ package cn.edu.hdu.blog.controller;
 import cn.edu.hdu.blog.entity.dto.BlogInfo;
 import cn.edu.hdu.blog.entity.dto.Blogger;
 import cn.edu.hdu.blog.entity.dto.Message;
+import cn.edu.hdu.blog.entity.enums.BlogKey;
 import cn.edu.hdu.blog.entity.vo.BlogInfoVo;
 import cn.edu.hdu.blog.entity.vo.BloggerVo;
-import cn.edu.hdu.blog.entity.vo.StatisticsVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
@@ -34,12 +34,6 @@ public class CommonController {
     @Autowired
     private LinkService linkService;
     @Autowired
-    private ArticleService articleService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private CommentService commentService;
-    @Autowired
     private MessageService messageService;
     @Autowired
     private RedisUtil redisUtil;
@@ -54,13 +48,14 @@ public class CommonController {
             ResponseTool.failed(MsgType.EMAIL_IS_EMPTY);
         message.setId(null);
         message.setCreateTime(null);
+        Integer num = (Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.MESSAGE_NUM.getKey());
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.MESSAGE_NUM.getKey(),num+1);
         return ResponseTool.success(messageService.saveOne(message));
     }
 
     @ApiOperation(value = "获取链接",httpMethod = "GET")
     @RequestMapping(value = "/link",method = RequestMethod.GET)
     public AjaxResult getLinks(Integer pageNum,Integer pageSize){
-
         if(null == pageNum|| null==pageSize)
             return ResponseTool.success(linkService.getAll(Pageable.unpaged()));
         if(pageNum<0||pageSize<1) return ResponseTool.failed(MsgType.PAGE_PARAM_IS_INVALID);
@@ -70,9 +65,11 @@ public class CommonController {
     @ApiOperation(value = "获取博客信息",httpMethod = "GET")
     @RequestMapping(value = "/blogInfo",method = RequestMethod.GET)
     public AjaxResult getBlogIntro(){
+        BlogInfoVo blogInfoVo = (BlogInfoVo) redisUtil.get(BlogKey.BLOG_INFO.getKey());
+        if(null!=blogInfoVo) return ResponseTool.success(blogInfoVo);
         BlogInfo blogInfo = blogInfoService.findFirst();
         if(null==blogInfo) return ResponseTool.failed(MsgType.SYSTEM_DATA_ERROR);
-        BlogInfoVo blogInfoVo = new BlogInfoVo();
+        blogInfoVo = new BlogInfoVo();
         BeanUtils.copyProperties(blogInfo,blogInfoVo);
         return ResponseTool.success(blogInfoVo);
     }
@@ -80,24 +77,16 @@ public class CommonController {
     @ApiOperation(value = "获取博主信息",httpMethod = "GET")
     @RequestMapping(value = "/blogger",method = RequestMethod.GET)
     public AjaxResult getBlogger(){
+        BloggerVo bloggerVo = (BloggerVo) redisUtil.get(BlogKey.BLOGGER.getKey());
+        if(null!=bloggerVo) return ResponseTool.success(bloggerVo);
         Blogger blogger = bloggerService.findFirst();
         if(null==blogger) return ResponseTool.failed(MsgType.SYSTEM_DATA_ERROR);
-        BloggerVo bloggerVo = new BloggerVo();
+        bloggerVo = new BloggerVo();
         BeanUtils.copyProperties(blogger,bloggerVo);
         return ResponseTool.success(bloggerVo);
     }
 
 
-    @ApiOperation(value = "获取统计信息",httpMethod = "GET")
-    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
-    public AjaxResult getStatistics(){
-        Long articleNum = articleService.countArticle();
-        Long cateNum = categoryService.count();
-        Long comment = commentService.count();
-        Long mess = messageService.count();
-        StatisticsVo statisticsVo = new StatisticsVo(articleNum,cateNum,comment,mess);
-        return ResponseTool.success(statisticsVo);
-    }
 
 
 }

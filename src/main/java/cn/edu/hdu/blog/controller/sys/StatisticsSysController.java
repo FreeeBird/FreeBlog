@@ -2,6 +2,8 @@ package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Statistics;
+import cn.edu.hdu.blog.entity.enums.BlogKey;
+import cn.edu.hdu.blog.entity.vo.StatisticsVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.StatisticsService;
@@ -20,15 +22,35 @@ public class StatisticsSysController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @RequestMapping(value = "/daily",method = RequestMethod.GET)
+    public AjaxResult getDaily(){
+        Statistics statistics = new Statistics();
+        statistics.setVisit((Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.DAY_VISIT.getKey()));
+        statistics.setHits((Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.DAY_HITS.getKey()));
+        return ResponseTool.success(statistics);
+    }
+
     @RequestMapping(value = "/weekly",method = RequestMethod.GET)
     public AjaxResult getWeekly(){
         return ResponseTool.success(statisticsService.getAll(PageRequest.of(0,7)));
     }
 
+
+    @RequestMapping(value = "/monthly",method = RequestMethod.GET)
+    public AjaxResult getMonthly(){
+        return ResponseTool.success(statisticsService.getAll(PageRequest.of(0,30)));
+    }
+
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getStatistics(){
-        Statistics statistics = new Statistics();
-        return null;
+        StatisticsVo statistics = new StatisticsVo();
+        statistics.setArticleNum((Long) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.ARTICLE_NUM.getKey()));
+        statistics.setCategoryNum((Long) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.CATEGORY_NUM.getKey()));
+        statistics.setCommentNum((Long) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.COMMENT_NUM.getKey()));
+        statistics.setMessageNum((Long) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.MESSAGE_NUM.getKey()));
+        statistics.setVisit((Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.VISIT_NUM.getKey()));
+        statistics.setHits((Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.HITS.getKey()));
+        return ResponseTool.success(statistics);
     }
 
 

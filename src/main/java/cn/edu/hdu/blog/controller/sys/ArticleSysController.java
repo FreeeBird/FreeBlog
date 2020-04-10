@@ -7,6 +7,7 @@ import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.ArticleService;
 import cn.edu.hdu.blog.service.inteface.CategoryService;
+import cn.edu.hdu.blog.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,8 @@ public class ArticleSysController {
     private ArticleService articleService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getArticleList(Integer pageNum, Integer pageSize){
@@ -32,7 +35,7 @@ public class ArticleSysController {
         return ResponseTool.success(articleService.getArticleWithCountVoList(pageable));
     }
 
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public AjaxResult getArticleById(@PathVariable Integer id){
         return ResponseTool.success(articleService.getOne(id));
     }
@@ -49,7 +52,10 @@ public class ArticleSysController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public AjaxResult deleteById(@PathVariable Integer id){
-        if(articleService.deleteById(id)) return ResponseTool.success();
+        if(articleService.deleteById(id)) {
+            redisUtil.hashSet("blog_statistics","article_num",articleService.countArticle());
+            return ResponseTool.success();
+        }
         else return ResponseTool.failed();
 
     }
@@ -59,6 +65,7 @@ public class ArticleSysController {
         if(null == article) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
         Article article1 = articleService.saveOne(article);
         categoryService.countChange(article1.getCategoryId(),1);
+        redisUtil.hashSet("blog_statistics","article_num",articleService.countArticle());
         return ResponseTool.success(article1);
     }
 

@@ -2,12 +2,14 @@ package cn.edu.hdu.blog.controller;
 
 
 import cn.edu.hdu.blog.entity.dto.Comment;
+import cn.edu.hdu.blog.entity.enums.BlogKey;
 import cn.edu.hdu.blog.entity.vo.CommentVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.ArticleService;
 import cn.edu.hdu.blog.service.inteface.CommentService;
+import cn.edu.hdu.blog.utils.RedisUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class ArticleController {
     private ArticleService articleService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @ApiOperation(value = "分页获取文章")
     @RequestMapping(value = "")
@@ -43,7 +47,8 @@ public class ArticleController {
     @ApiOperation(value = "根据ID获取文章")
     @RequestMapping(value = "/{id}")
     public AjaxResult getArticleById(@PathVariable Integer id){
-
+        Integer hits = (Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.HITS.getKey());
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.HITS.getKey(),hits+1);
         return ResponseTool.success(articleService.getArticleById(id));
     }
 
@@ -94,6 +99,8 @@ public class ArticleController {
         if(!articleService.isExistById(articleId)) return ResponseTool.failed(MsgType.PARAM_IS_INVALID);
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentVo,comment);
+        Integer num = (Integer) redisUtil.hashGet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.COMMENT_NUM.getKey());
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.COMMENT_NUM.getKey(),num+1);
         return ResponseTool.success(commentService.saveOne(comment));
     }
 

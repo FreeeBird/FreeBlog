@@ -1,6 +1,7 @@
 package cn.edu.hdu.blog.controller;
 
 import cn.edu.hdu.blog.entity.dto.Blogger;
+import cn.edu.hdu.blog.entity.enums.BlogKey;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
@@ -37,15 +38,15 @@ public class SecurityController {
             return ResponseTool.failed(MsgType.LOGIN_FAILED);
         HttpSession session = request.getSession();
         UUID token = UUID.randomUUID();
-        session.setAttribute("token",token);
-        redisUtil.set("token",token,15*60*1000);
+        session.setAttribute(BlogKey.BLOG_TOKEN.getKey(),token);
+        redisUtil.set(BlogKey.BLOG_TOKEN.getKey(),token,15*60*1000);
         return ResponseTool.success();
     }
 
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
     public AjaxResult logout(HttpServletRequest request){
-        redisUtil.del("token");
-        request.getSession().removeAttribute("token");
+        redisUtil.del(BlogKey.BLOG_TOKEN.getKey());
+        request.getSession().removeAttribute(BlogKey.BLOG_TOKEN.getKey());
         return ResponseTool.success();
     }
 }

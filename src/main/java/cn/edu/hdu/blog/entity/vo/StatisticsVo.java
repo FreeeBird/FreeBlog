@@ -1,6 +1,8 @@
 package cn.edu.hdu.blog.entity.vo;
 
-public class StatisticsVo {
+import cn.edu.hdu.blog.entity.dto.Statistics;
+
+public class StatisticsVo extends Statistics {
 
     private Long articleNum;
     private Long categoryNum;

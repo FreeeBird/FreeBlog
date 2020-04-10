@@ -18,6 +18,8 @@ public class Statistics {
     private Integer hits;
     @Column(columnDefinition = "int default 0")
     private Integer visit;
+    @Column(columnDefinition = "int default 0")
+
     @CreatedDate
     private Date createTime;
 
