@@ -10,6 +10,7 @@ import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.ArticleService;
 import cn.edu.hdu.blog.service.inteface.CommentService;
+import cn.edu.hdu.blog.utils.Markdown2HtmlUtils;
 import cn.edu.hdu.blog.utils.RedisUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -63,12 +64,13 @@ public class ArticleController {
         if(null==hits) hits = 0;
         redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(),BlogKey.HITS.getKey(),hits+1);
         ArticleDetailVo article = articleService.getArticleById(id);
-        if(article.getType()==1 && redisUtil.hasKey(BlogKey.ARTICLE.getKey()+id)){
+        if(redisUtil.hasKey(BlogKey.ARTICLE.getKey()+id)){
             article.setContent((String) redisUtil.get(BlogKey.ARTICLE.getKey()+id));
-            return ResponseTool.success(article);
+        }else if (article.getType()==1){
+            String html = Markdown2HtmlUtils.parse(article.getContent());
+            redisUtil.set(BlogKey.ARTICLE.getKey()+id,html);
+            article.setContent(html);
         }
-        // todo
-        // md to html save to redis
         return ResponseTool.success(article);
     }
 

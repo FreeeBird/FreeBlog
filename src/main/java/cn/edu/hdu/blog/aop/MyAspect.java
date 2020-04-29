@@ -17,7 +17,7 @@ public class MyAspect {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("execution(public * cn.edu.hdu.blog.controller.*.*(..))")
+    @Pointcut("execution(public * cn.edu.hdu.blog.controller.CommonController.test())")
     public void pointCut(){}
 
     @Before("pointCut()")
