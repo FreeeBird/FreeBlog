@@ -2,8 +2,10 @@ package cn.edu.hdu.blog.entity.enums;
 
 public enum BlogKey {
     BLOG_TOKEN("blogToken"),
+
     BLOGGER("bloggerInfo"),
     BLOG_INFO("blogInfo"),
+
     BLOG_STATISTICS("blogStatistics"),
     ARTICLE_NUM("articleNum"),
     CATEGORY_NUM("CategoryNum"),
@@ -14,6 +16,7 @@ public enum BlogKey {
     DAY_VISIT("dayVisit"),
     DAY_HITS("dayHits"),
 
+    ARTICLE("article"),
 
     ;
 

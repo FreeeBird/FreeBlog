@@ -1,6 +1,7 @@
 package cn.edu.hdu.blog.controller;
 
 
+import cn.edu.hdu.blog.Exception.BizException;
 import cn.edu.hdu.blog.entity.dto.BlogInfo;
 import cn.edu.hdu.blog.entity.dto.Blogger;
 import cn.edu.hdu.blog.entity.dto.Message;
@@ -86,6 +87,10 @@ public class CommonController {
         return ResponseTool.success(bloggerVo);
     }
 
+    @RequestMapping(value = "/test")
+    public AjaxResult test(){
+        throw new BizException("101","exp");
+    }
 
 
 

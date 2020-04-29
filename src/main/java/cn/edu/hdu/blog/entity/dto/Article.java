@@ -49,6 +49,8 @@ public class Article {
         this.updateTime = updateTime;
     }
 
+
+
     @Override
     public String toString() {
         return "Article{" +
@@ -64,6 +66,7 @@ public class Article {
                 ", updateTime=" + updateTime +
                 '}';
     }
+
 
     public Integer getId() {
         return id;
