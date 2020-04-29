@@ -22,6 +22,12 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    /**
+     * 获取所有分类
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("")
     public AjaxResult getAllByPage(Integer pageNum, Integer pageSize){
         if(null == pageNum || null == pageSize) return getAll();
@@ -35,12 +41,22 @@ public class CategoryController {
         return ResponseTool.success(categoryService.getAll(Pageable.unpaged()));
     }
 
+    /**
+     * 根据ID获取分类信息
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/{id}")
     public AjaxResult getOneById(@PathVariable Integer id){
         Category category = categoryService.getOne(id);
         return ResponseTool.success(category);
     }
 
+    /**
+     * 按文章数量排序
+     * @param num
+     * @return
+     */
     @RequestMapping(value = "/order")
     public AjaxResult getTopNumberOrderByCountDesc(Integer num){
         if(null == num) return getAllNotPage();

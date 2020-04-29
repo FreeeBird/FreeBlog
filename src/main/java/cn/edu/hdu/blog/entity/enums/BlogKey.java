@@ -17,6 +17,7 @@ public enum BlogKey {
     DAY_HITS("dayHits"),
 
     ARTICLE("article"),
+    LINKS("links"),
 
     ;
 

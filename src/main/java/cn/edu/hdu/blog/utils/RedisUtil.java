@@ -17,6 +17,11 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
+    private static final Long HOUR = 1000*60*60L;
+    private static final Long HALF_HOUR = 1000*60*30L;
+    private static final Long DAY = 1000*60*60*24L;
+    private static final Long HALF_DAY = 1000*60*60*12L;
+
 
     public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
