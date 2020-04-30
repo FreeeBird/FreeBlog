@@ -1,4 +1,4 @@
-package cn.edu.hdu.blog.task;
+package cn.edu.hdu.blog.init;
 
 
 import cn.edu.hdu.blog.entity.dto.BlogInfo;
@@ -21,6 +21,8 @@ public class InitialData {
     private BloggerRepository bloggerRepository;
     @Autowired
     private BlogInfoRepository blogInfoRepository;
+    @Autowired
+    private BlogConfig blogConfig;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -44,6 +46,7 @@ public class InitialData {
 
     @PostConstruct
     public void initBlog(){
+        System.out.println(blogConfig.getTitle());
         BlogInfo blog = blogInfoRepository.findFirstBy();
         if(null!=blog){
             logger.info("Blog info is exist.");

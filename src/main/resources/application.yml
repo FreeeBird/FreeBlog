@@ -7,3 +7,31 @@
 spring:
   profiles:
     active: dev
+
+
+
+
+
+blog:
+#  博客名称
+  title: "my blog"
+#  关键词
+  keywords: "online program"
+#  博客介绍
+  description: "It's a new blog"
+
+blogger:
+#  博主昵称
+  nickname: "rookie"
+#  用于登录的用户名
+  username: "admin"
+#  密码
+  password: "admin"
+#  电子邮箱
+  email: "rookie@hdu.cn"
+#  所在地
+  address: "ZheJiang HangZhou"
+#  个人介绍
+  introduction: "a blogger"
+#  头像图片地址
+  portraitUrl: ""
