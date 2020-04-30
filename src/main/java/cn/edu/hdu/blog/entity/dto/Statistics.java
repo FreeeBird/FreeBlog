@@ -26,11 +26,10 @@ public class Statistics {
     public Statistics() {
     }
 
-    public Statistics(Integer id, Integer hits, Integer visit, Date createTime) {
+    public Statistics(Integer id, Integer hits, Integer visit) {
         this.id = id;
         this.hits = hits;
         this.visit = visit;
-        this.createTime = createTime;
     }
 
     @Override
