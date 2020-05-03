@@ -32,7 +32,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public Page<Statistics> getAll(Pageable pageable) {
-        return statisticsRepository.findAllOrderByCreateTime(pageable);
+        return statisticsRepository.findAllByOrderByCreateTimeDesc(pageable);
     }
 
     @Override

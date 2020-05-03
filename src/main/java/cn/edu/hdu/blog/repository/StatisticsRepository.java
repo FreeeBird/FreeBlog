@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StatisticsRepository extends JpaRepository<Statistics,Integer> {
 
-    Page<Statistics> findAllOrderByCreateTime(Pageable pageable);
+    Page<Statistics> findAllByOrderByCreateTimeDesc(Pageable pageable);
 }

@@ -8,8 +8,8 @@ public enum BlogKey {
 
     BLOG_STATISTICS("blogStatistics"),
     ARTICLE_NUM("articleNum"),
-    CATEGORY_NUM("CategoryNum"),
-    COMMENT_NUM("CommentNum"),
+    CATEGORY_NUM("categoryNum"),
+    COMMENT_NUM("commentNum"),
     MESSAGE_NUM("messageNum"),
     VISIT_NUM("visitNum"),
     HITS("hits"),

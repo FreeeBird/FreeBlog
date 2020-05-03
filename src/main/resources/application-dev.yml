@@ -40,7 +40,7 @@ spring:
 
 # 七牛云配置
 qiniu:
-    domain: http://q85tncpu6.bkt.clouddn.com
+    domain: http://qiniu.mafangui.cn
     access-key: FA2GnJW8vQrfb9QeutuiNl4w4qPrjYDvpquLDhyK
     secret-key: ESOjdYhQ_oZd-VIhRp4u_cj0R9nCHPhMdNbE7IuZ
     bucket: free-blog-api

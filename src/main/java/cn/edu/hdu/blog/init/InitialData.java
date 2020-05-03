@@ -75,14 +75,15 @@ public class InitialData {
     }
 
     public void initCache(){
-        if(!redisUtil.hHasKey(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.HITS.getKey())){
-            redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.HITS.getKey(),0);
-        }
-        if(!redisUtil.hHasKey(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.VISIT_NUM.getKey())){
-            redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.VISIT_NUM.getKey(),0);
+        if(redisUtil.hasKey(BlogKey.BLOG_STATISTICS.getKey())){
+            return;
         }
         redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.DAY_VISIT.getKey(),0);
         redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.DAY_HITS.getKey(),0);
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.ARTICLE_NUM.getKey(),0);
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.CATEGORY_NUM.getKey(),0);
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.COMMENT_NUM.getKey(),0);
+        redisUtil.hashSet(BlogKey.BLOG_STATISTICS.getKey(), BlogKey.MESSAGE_NUM.getKey(),0);
     }
 
 }

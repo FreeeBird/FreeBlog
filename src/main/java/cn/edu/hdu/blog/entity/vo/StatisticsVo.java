@@ -4,50 +4,68 @@ import cn.edu.hdu.blog.entity.dto.Statistics;
 
 public class StatisticsVo extends Statistics {
 
-    private Long articleNum;
-    private Long categoryNum;
-    private Long commentNum;
-    private Long messageNum;
+    private Integer articleNum;
+    private Integer categoryNum;
+    private Integer commentNum;
+    private Integer messageNum;
+    private Integer dayVisit;
+    private Integer dayHits;
 
     public StatisticsVo() {
     }
 
-    public StatisticsVo(Long articleNum, Long categoryNum, Long commentNum, Long messageNum) {
+    public StatisticsVo(Integer articleNum, Integer categoryNum, Integer commentNum, Integer messageNum) {
         this.articleNum = articleNum;
         this.categoryNum = categoryNum;
         this.commentNum = commentNum;
         this.messageNum = messageNum;
     }
 
-    public Long getArticleNum() {
+    public Integer getDayVisit() {
+        return dayVisit;
+    }
+
+    public void setDayVisit(Integer dayVisit) {
+        this.dayVisit = dayVisit;
+    }
+
+    public Integer getDayHits() {
+        return dayHits;
+    }
+
+    public void setDayHits(Integer dayHits) {
+        this.dayHits = dayHits;
+    }
+
+    public Integer getArticleNum() {
         return articleNum;
     }
 
-    public void setArticleNum(Long articleNum) {
+    public void setArticleNum(Integer articleNum) {
         this.articleNum = articleNum;
     }
 
-    public Long getCategoryNum() {
+    public Integer getCategoryNum() {
         return categoryNum;
     }
 
-    public void setCategoryNum(Long categoryNum) {
+    public void setCategoryNum(Integer categoryNum) {
         this.categoryNum = categoryNum;
     }
 
-    public Long getCommentNum() {
+    public Integer getCommentNum() {
         return commentNum;
     }
 
-    public void setCommentNum(Long commentNum) {
+    public void setCommentNum(Integer commentNum) {
         this.commentNum = commentNum;
     }
 
-    public Long getMessageNum() {
+    public Integer getMessageNum() {
         return messageNum;
     }
 
-    public void setMessageNum(Long messageNum) {
+    public void setMessageNum(Integer messageNum) {
         this.messageNum = messageNum;
     }
 

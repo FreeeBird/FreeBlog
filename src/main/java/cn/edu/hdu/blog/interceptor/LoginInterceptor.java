@@ -1,5 +1,6 @@
 package cn.edu.hdu.blog.interceptor;
 
+import cn.edu.hdu.blog.entity.enums.BlogKey;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.MsgType;
 import cn.edu.hdu.blog.response.ResponseTool;
@@ -20,11 +21,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = (String) redisUtil.get("token");
+        String token = (String) redisUtil.get(BlogKey.BLOG_TOKEN.getKey());
         if(!StringUtils.isEmpty(token)){
             return true;
         }
-        token = (String) request.getSession().getAttribute("token");
+        token = (String) request.getSession().getAttribute(BlogKey.BLOG_TOKEN.getKey());
         if(!StringUtils.isEmpty(token)){
             return true;
         }
@@ -40,6 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Content-Type", "application/json;charset=UTF-8");
         PrintWriter writer = response.getWriter();
         AjaxResult result = ResponseTool.failed(MsgType.NOT_LOGIN);
         ObjectMapper mapper = new ObjectMapper();
