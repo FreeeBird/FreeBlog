@@ -2,12 +2,13 @@ package cn.edu.hdu.blog.controller.sys;
 
 
 import cn.edu.hdu.blog.entity.dto.Blogger;
+import cn.edu.hdu.blog.entity.enums.BlogKey;
 import cn.edu.hdu.blog.entity.vo.BloggerSysVo;
 import cn.edu.hdu.blog.response.AjaxResult;
 import cn.edu.hdu.blog.response.ResponseTool;
 import cn.edu.hdu.blog.service.inteface.BloggerService;
-import cn.edu.hdu.blog.utils.IgnorePropertiesUtil;
 import cn.edu.hdu.blog.utils.MD5Utils;
+import cn.edu.hdu.blog.utils.RedisUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,15 @@ public class BloggerSysController {
 
     @Autowired
     private BloggerService bloggerService;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public AjaxResult getBlogger(){
         Blogger blogger = bloggerService.findFirst();
         BloggerSysVo bloggerSysVo = new BloggerSysVo();
         BeanUtils.copyProperties(blogger,bloggerSysVo);
+        redisUtil.del(BlogKey.BLOGGER.getKey());
         return ResponseTool.success(bloggerSysVo);
     }
 
